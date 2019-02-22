@@ -1,5 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using A1;
+using A0;
 using TestCommon;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 
-namespace A1.Tests
+namespace A0.Tests
 {
     [TestClass()]
     public class ProgramTests
