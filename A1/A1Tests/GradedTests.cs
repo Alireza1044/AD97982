@@ -9,11 +9,11 @@ using TestCommon;
 
 namespace A12.Tests
 {
-    [TestClass()]//Grade:A12:0
+    [TestClass()]
     public class GradedTests
     {
-        [TestMethod(),Timeout(30000)]//Timeout???
-        [DeploymentItem("TestData", "A12_TestData")]
+        [TestMethod(), Timeout(30000)]
+        [DeploymentItem("TestData", "A1_TestData")]
         public void SolveTest()
         {
             Processor[] problems = new Processor[] {
@@ -26,7 +26,7 @@ namespace A12.Tests
 
             foreach (var p in problems)
             {
-                TestTools.RunLocalTest("A12", p.Process, p.TestDataName, p.Verifier);
+                TestTools.RunLocalTest("A1", p.Process, p.TestDataName, p.Verifier);
             }
         }
     }
