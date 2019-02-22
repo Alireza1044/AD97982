@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2016
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "A1", "A1\A1.csproj", "{0F536868-A102-42EF-9522-FC1F8A6D1743}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "A0", "A1\A0.csproj", "{0F536868-A102-42EF-9522-FC1F8A6D1743}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "A1Tests", "A1Tests\A1Tests.csproj", "{0A483B95-1AB8-4D3F-A13A-08B69B432D8E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "A0Tests", "A1Tests\A0Tests.csproj", "{0A483B95-1AB8-4D3F-A13A-08B69B432D8E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestCommon", "..\TestCommon\TestCommon.csproj", "{C39FF0C4-6960-42AD-8E2C-D2CAFE850A52}"
 EndProject
