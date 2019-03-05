@@ -13,7 +13,9 @@ namespace TestCommon
 
         public virtual Action<string, string> Verifier { get; set; } = null;
 
-        public Processor(string testDataName) =>
+        public Processor(string testDataName)
+        {
             this.TestDataName = testDataName;
+        }
     }
 }

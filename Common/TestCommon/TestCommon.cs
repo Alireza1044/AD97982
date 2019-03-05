@@ -124,6 +124,32 @@ namespace TestCommon
             return string.Join("\n", processor(count, data,last[0],last[1]).ToString());
         }
 
+        public static string Process(string inStr, Func<long, long, long[][], long, long[][], long[]> processor)
+        {
+            var lines = inStr.Split(NewLineChars, StringSplitOptions.RemoveEmptyEntries);
+            long[] count = lines.First().Split(IgnoreChars, StringSplitOptions.RemoveEmptyEntries)
+                                        .Select(n => long.Parse(n))
+                                        .ToArray();
+            long[][] data = ReadTree(lines.Skip(1).Take((int)count[1]));
+
+            long queryCount = long.Parse(lines.Skip(1 + (int)count[1]).Take(1).FirstOrDefault());
+            long[][] queries = ReadTree(lines.Skip(2 + (int)count[1]));
+
+            return string.Join("\n", processor(count[0],count[1], data, queryCount, queries));
+        }
+
+        public static string Process(string inStr, Func<long, long[][], long, string[]> processor)
+        {
+            var lines = inStr.Split(NewLineChars, StringSplitOptions.RemoveEmptyEntries);
+            long count = int.Parse(lines.First());
+            long[][] data = ReadTree(lines.Skip(1).Take(lines.Length - 2));
+            long[] last = lines.Last().Split(IgnoreChars, StringSplitOptions.RemoveEmptyEntries)
+                                  .Select(n => long.Parse(n))
+                                  .ToArray();
+
+            return string.Join("\n", processor(count, data, last[0]));
+        }
+
         public static string Process(string inStr, Func<long, long[][], long> processor)
         {
             var lines = inStr.Split(NewLineChars, StringSplitOptions.RemoveEmptyEntries);
