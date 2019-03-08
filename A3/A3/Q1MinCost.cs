@@ -7,18 +7,91 @@ using TestCommon;
 
 namespace A3
 {
-    public class Q1MinCost:Processor
+    public class Node
+    {
+        public List<(Node, long)> Children { get; set; }
+        public long Weight { get; set; }
+        public int Key { get; set; }
+        public bool IsChecked { get; set; }
+        public Node(int key)
+        {
+            Children = new List<(Node, long)>();
+            Weight = 2_000_000_000;
+            Key = key;
+            IsChecked = false;
+        }
+    }
+
+    public class Q1MinCost : Processor
     {
         public Q1MinCost(string testDataName) : base(testDataName) { }
 
         public override string Process(string inStr) =>
-            TestTools.Process(inStr, (Func<long, long[][], long,long,long>)Solve);
+            TestTools.Process(inStr, (Func<long, long[][], long, long, long>)Solve);
 
 
-        public long Solve(long nodeCount,long [][] edges, long startNode, long endNode)
+        public long Solve(long nodeCount, long[][] edges, long startNode, long endNode)
         {
             //Write Your Code Here
-            return 0;
+            Node[] graph = new Node[nodeCount + 1];
+            BuildGraph(edges, graph);
+            return FindMinimumCost(graph, startNode, endNode);
+        }
+
+        private long FindMinimumCost(Node[] graph, long startNode, long endNode)
+        {
+            List<Node> nodes = new List<Node>();
+            graph[startNode].Weight = 0;
+            var graphList = graph.ToList();
+            graphList.RemoveAt(0);
+
+            while (nodes.Count <= graph.Length)
+            {
+                Node temp = new Node(0);
+                if (graphList.Count != 0)
+                    graphList = graphList.OrderBy(x => x.Weight).ToList();
+
+
+                for (int i = 0; i < graphList.Count; i++)
+                {
+                    if (graphList[i].IsChecked == false)
+                    {
+                        temp = graphList[i];
+                        nodes.Add(temp);
+                        break;
+                    }
+                }
+
+                temp.IsChecked = true;
+                if (temp.Key == endNode)
+                {
+                    if (temp.Weight == 2000000000)
+                        break;
+                    else
+                        return temp.Weight;
+                }
+
+                for (int i = 0; i < temp.Children.Count(); i++)
+                {
+                    if (temp.Weight + temp.Children[i].Item2 < temp.Children[i].Item1.Weight)
+                        temp.Children[i].Item1.Weight = temp.Weight + temp.Children[i].Item2;
+
+                }
+            }
+            return -1;
+        }
+
+        public static Node[] BuildGraph(long[][] edges, Node[] graph)
+        {
+            for (int i = 1; i < graph.Length; i++)
+            {
+                graph[i] = new Node(i);
+            }
+            for (int i = 0; i < edges.GetLength(0); i++)
+            {
+                graph[edges[i][0]].Children.Add((graph[edges[i][1]], edges[i][2]));
+            }
+            return graph;
         }
     }
 }

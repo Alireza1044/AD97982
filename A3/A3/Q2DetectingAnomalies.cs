@@ -17,6 +17,33 @@ namespace A3
         public long Solve(long nodeCount, long[][] edges)
         {
             //Write Your Code Here
+            Node[] graph = new Node[nodeCount + 1];
+            Q1MinCost.BuildGraph(edges, graph);
+            graph[1].Weight = 0;
+            return BellmanFord(graph,edges);
+        }
+
+        private long BellmanFord(Node[] graph, long[][] edges)
+        {
+            for (int k = 1; k < graph.Length - 1; k++)
+            {               
+                for (int i = 1; i < graph.Length; i++)
+                {
+                    for (int j = 0; j < graph[i].Children.Count; j++)
+                    {
+                        if (graph[i].Children[j].Item1.Weight > graph[i].Weight + graph[i].Children[j].Item2)
+                            graph[i].Children[j].Item1.Weight = graph[i].Weight + graph[i].Children[j].Item2;
+                    }
+                }
+            }
+            for (int i = 1; i < graph.Length; i++)
+            {
+                for (int j = 0; j < graph[i].Children.Count; j++)
+                {
+                    if (graph[i].Children[j].Item1.Weight > graph[i].Weight + graph[i].Children[j].Item2)
+                        return 1;
+                }
+            }
             return 0;
         }
     }
