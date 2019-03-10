@@ -53,8 +53,9 @@ namespace A3
                     foreach (var key in negativeCycles)
                     {
                         graph[key].IsChecked = true;
-                        foreach (var i in graph[key].Children)
-                            i.Item1.IsChecked = true;
+                        BFS(graph, graph[key]);
+                        //foreach (var i in graph[key].Children)
+                        //    i.Item1.IsChecked = true;
                     }
                     break;
                 }
@@ -63,6 +64,23 @@ namespace A3
                 if (temp.Prev != null)
                     queue.Enqueue(temp.Prev);
                 else break;
+            }
+            return graph;
+        }
+        
+        public Node[] BFS(Node[] graph,Node startNode)
+        {
+            Queue<Node> queue = new Queue<Node>();
+            queue.Enqueue(startNode);
+            while (queue.Any())
+            {
+                Node temp = queue.Dequeue();
+                temp.IsChecked = true;
+                foreach (var child in temp.Children)
+                {
+                    if(!child.Item1.IsChecked)
+                        queue.Enqueue(child.Item1);
+                }
             }
             return graph;
         }
@@ -92,13 +110,13 @@ namespace A3
             {
                 for (int j = 0; j < graph[i].Children.Count; j++)
                 {
-                    if (graph[i].Children[j].Item1.Weight != graph[i].Weight + graph[i].Children[j].Item2)
+                    if (graph[i].Children[j].Item1.Weight > graph[i].Weight + graph[i].Children[j].Item2)
                     {
                         infinitePossible.Enqueue(graph[i].Children[j].Item1);
-                        foreach (var child in graph[i].Children[j].Item1.Children)
-                        {
-                            infinitePossible.Enqueue(child.Item1);
-                        }
+                        //foreach (var child in graph[i].Children[j].Item1.Children)
+                        //{
+                        //    infinitePossible.Enqueue(child.Item1);
+                        //}
                     }
                 }
             }
