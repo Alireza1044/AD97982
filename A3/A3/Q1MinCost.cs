@@ -9,14 +9,18 @@ namespace A3
 {
     public class Node
     {
+        long Max = 2_000_000_000;
         public List<(Node, long)> Children { get; set; }
+        public List<(Node, long)> Parent { get; set; }
+        public Node Prev { get; set; }
         public long Weight { get; set; }
         public int Key { get; set; }
         public bool IsChecked { get; set; }
         public Node(int key)
         {
             Children = new List<(Node, long)>();
-            Weight = 2_000_000_000;
+            Parent = new List<(Node, long)>();
+            Weight = Max;
             Key = key;
             IsChecked = false;
         }
@@ -26,6 +30,7 @@ namespace A3
     {
         public Q1MinCost(string testDataName) : base(testDataName) { }
 
+        public static long Max = 2_000_000_000;
         public override string Process(string inStr) =>
             TestTools.Process(inStr, (Func<long, long[][], long, long, long>)Solve);
 
@@ -38,14 +43,14 @@ namespace A3
             return FindMinimumCost(graph, startNode, endNode);
         }
 
-        private long FindMinimumCost(Node[] graph, long startNode, long endNode)
+        public static long FindMinimumCost(Node[] graph, long startNode, long endNode)
         {
             List<Node> nodes = new List<Node>();
             graph[startNode].Weight = 0;
             var graphList = graph.ToList();
             graphList.RemoveAt(0);
 
-            while (nodes.Count <= graph.Length)
+            while (true)
             {
                 Node temp = new Node(0);
                 if (graphList.Count != 0)
@@ -65,7 +70,7 @@ namespace A3
                 temp.IsChecked = true;
                 if (temp.Key == endNode)
                 {
-                    if (temp.Weight == 2000000000)
+                    if (temp.Weight == Max)
                         break;
                     else
                         return temp.Weight;
@@ -90,6 +95,7 @@ namespace A3
             for (int i = 0; i < edges.GetLength(0); i++)
             {
                 graph[edges[i][0]].Children.Add((graph[edges[i][1]], edges[i][2]));
+                graph[edges[i][1]].Parent.Add((graph[edges[i][0]], edges[i][2]));
             }
             return graph;
         }

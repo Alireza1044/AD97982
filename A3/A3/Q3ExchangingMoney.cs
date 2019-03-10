@@ -13,49 +13,96 @@ namespace A3
         public override string Process(string inStr) =>
             TestTools.Process(inStr, (Func<long, long[][], long, string[]>)Solve);
 
+        long Max = 2_000_000_000;
 
         public string[] Solve(long nodeCount, long[][] edges,long startNode)
         {
             Node[] graph = new Node[nodeCount + 1];
             Q1MinCost.BuildGraph(edges, graph);
-            var negKeys = BellmanFord(graph,edges ,startNode);
+            var infinitePossible = BellmanFord(graph,edges ,startNode);
+            List<int> NegativeCycle = new List<int>();
+            while (infinitePossible.Any())
+            {
+                var temp = infinitePossible.Dequeue();
+                TravelBack(graph,temp);
+            }
             List<string> result = new List<string>();
             for (int i = 1; i < graph.Length; i++)
             {
-                if (negKeys.Contains(graph[i].Key))
-                    result.Add("-");
-                else if (graph[i].Key == 2000000000)
+                if (graph[i].Weight == Max)
                     result.Add("*");
+                else if (graph[i].IsChecked)
+                    result.Add("-");
                 else result.Add(graph[i].Weight.ToString());
             }
+            
             return result.ToArray();
         }
 
-        private List<int> BellmanFord(Node[] graph, long[][] edges, long startNode)
+        private Node[] TravelBack(Node[] graph, Node CanNeg)
         {
+            Queue<Node> queue = new Queue<Node>();
+            queue.Enqueue(CanNeg);
+            List<int> negativeCycles = new List<int>();
+            while (true)
+            {
+                var temp = queue.Dequeue();
+                if (negativeCycles.Contains(temp.Key))
+                {
+                    graph[temp.Key].IsChecked = true;
+                    foreach (var key in negativeCycles)
+                    {
+                        graph[key].IsChecked = true;
+                        foreach (var i in graph[key].Children)
+                            i.Item1.IsChecked = true;
+                    }
+                    break;
+                }
+                else
+                    negativeCycles.Add(temp.Key);
+                if (temp.Prev != null)
+                    queue.Enqueue(temp.Prev);
+                else break;
+            }
+            return graph;
+        }
+         
+        private Queue<Node> BellmanFord(Node[] graph, long[][] edges, long startNode)
+        {
+            graph[startNode].Weight = 0;
             for (int k = 1; k < graph.Length - 1; k++)
             {
                 for (int i = 1; i < graph.Length; i++)
                 {
                     for (int j = 0; j < graph[i].Children.Count; j++)
                     {
-                        if (graph[i].Children[j].Item1.Weight > graph[i].Weight + graph[i].Children[j].Item2)
+                        if (graph[i].Children[j].Item1.Weight > graph[i].Weight + graph[i].Children[j].Item2
+                            && graph[i].Weight != Max)
+                        {
                             graph[i].Children[j].Item1.Weight = graph[i].Weight + graph[i].Children[j].Item2;
+                            graph[i].Children[j].Item1.Prev = graph[i];
+                        }
                     }
                 }
             }
 
-            
-            List<int> negativeKeys = new List<int>();
+            Queue<Node> infinitePossible = new Queue<Node>();
+
             for (int i = 1; i < graph.Length; i++)
             {
                 for (int j = 0; j < graph[i].Children.Count; j++)
                 {
-                    if (graph[i].Children[j].Item1.Weight > graph[i].Weight + graph[i].Children[j].Item2)
-                        negativeKeys.Add(graph[i].Children[j].Item1.Key);
+                    if (graph[i].Children[j].Item1.Weight != graph[i].Weight + graph[i].Children[j].Item2)
+                    {
+                        infinitePossible.Enqueue(graph[i].Children[j].Item1);
+                        foreach (var child in graph[i].Children[j].Item1.Children)
+                        {
+                            infinitePossible.Enqueue(child.Item1);
+                        }
+                    }
                 }
             }
-            return negativeKeys;
+            return infinitePossible;
         }
     }
 }

@@ -18,7 +18,15 @@ namespace A3
                               long[][] edges, long QueriesCount, 
                               long[][]Queries)
         {
+            Node[] graph = new Node[NodeCount + 1];
+            Q1MinCost.BuildGraph(edges, graph);
+            CalculateDistance(graph,Queries);
             return new long[] { };
+        }
+
+        private void CalculateDistance(Node[] graph, long[][] queries)
+        {
+            
         }
     }
 }
