@@ -113,10 +113,6 @@ namespace A3
                     if (graph[i].Children[j].Item1.Weight > graph[i].Weight + graph[i].Children[j].Item2)
                     {
                         infinitePossible.Enqueue(graph[i].Children[j].Item1);
-                        //foreach (var child in graph[i].Children[j].Item1.Children)
-                        //{
-                        //    infinitePossible.Enqueue(child.Item1);
-                        //}
                     }
                 }
             }

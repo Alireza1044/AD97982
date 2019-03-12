@@ -45,7 +45,6 @@ namespace A3
 
         public static long FindMinimumCost(Node[] graph, long startNode, long endNode)
         {
-            List<Node> nodes = new List<Node>();
             graph[startNode].Weight = 0;
             var graphList = graph.ToList();
             graphList.RemoveAt(0);
@@ -62,7 +61,6 @@ namespace A3
                     if (graphList[i].IsChecked == false)
                     {
                         temp = graphList[i];
-                        nodes.Add(temp);
                         break;
                     }
                 }
@@ -80,7 +78,6 @@ namespace A3
                 {
                     if (temp.Weight + temp.Children[i].Item2 < temp.Children[i].Item1.Weight)
                         temp.Children[i].Item1.Weight = temp.Weight + temp.Children[i].Item2;
-
                 }
             }
             return -1;
