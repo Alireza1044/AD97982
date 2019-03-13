@@ -63,7 +63,7 @@ namespace A3
                 {
                     dist[j] = graph[j].Distance;
                     distR[j] = graphR[j].Distance;
-                }              
+                }
                 long temp = BiDirectionalDijkstra(graph, graphR, Queries[i][0], Queries[i][1], dist, distR);
                 result.Add(temp);
             }
