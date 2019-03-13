@@ -12,16 +12,16 @@ namespace A3.Tests
     [TestClass()]
     public class GradedTests
     {
-        //[TestMethod(), Timeout(2000)]
+        //[TestMethod(), Timeout(90000)]
         [TestMethod()]
         [DeploymentItem("TestData", "A3_TestData")]
         public void SolveTest()
         {
             Processor[] problems = new Processor[] {
-               new Q1MinCost("TD1"),
-               new Q2DetectingAnomalies("TD2"),
-               new Q3ExchangingMoney("TD3"),
-               //new Q4FriendSuggestion("TD4")
+               //new Q1MinCost("TD1"),
+               //new Q2DetectingAnomalies("TD2"),
+               //new Q3ExchangingMoney("TD3"),
+               new Q4FriendSuggestion("TD4")
             };
 
             foreach (var p in problems)

@@ -23,15 +23,20 @@ namespace A3
             Node[] graph = new Node[NodeCount + 1];
             Node[] graphR = new Node[NodeCount + 1];
             List<long> result = new List<long>();
-            for (int i = 0; i < QueriesCount; i++)
-            {
                 Q1MinCost.BuildGraph(edges, graph);
                 BuildGraphR(edges, graphR);
+            for (int i = 0; i < QueriesCount; i++)
+            {
+                for (int j = 1; j < graph.Count(); j++)
+                {
+                    graph[j].IsChecked = false;
+                    graphR[j].IsChecked = false;
+                    graph[j].Weight = Max;
+                    graphR[j].Weight = Max;
+                }
                 List<Node> graphList = graph.ToList();
                 List<Node> graphListR = graphR.ToList();
 
-                graphList = graph.ToList();
-                graphListR = graph.ToList();
                 graphList[(int)Queries[i][0]].Weight = 0;
                 graphListR[(int)Queries[i][1]].Weight = 0;
                 graphList.RemoveAt(0);
@@ -60,10 +65,23 @@ namespace A3
         {
             List<int> proc = new List<int>();
             List<int> procR = new List<int>();
-            graphListR[(int)endNode-1].Weight = 0;
-            graphList[(int)startNode-1].Weight = 0;
 
-            while(true)
+            //long[] dist = new long[graphList.Count];
+            //long[] distR = new long[graphListR.Count];
+
+            //for (int i = 0; i < dist.Count(); i++)
+            //{
+            //    dist[i] = Max;
+            //    distR[i] = Max;
+            //}
+
+            //distR[(int)endNode-1] = 0;
+            //dist[(int)startNode-1] = 0;
+
+            graphListR[(int)endNode - 1].Weight = 0;
+            graphList[(int)startNode - 1].Weight = 0;
+
+            while (true)
             {
                 Node temp = new Node(0);
                 Node tempR = new Node(0);
@@ -87,9 +105,9 @@ namespace A3
                     if (temp.Weight + temp.Children[j].Item2 < temp.Children[j].Item1.Weight)//relax
                     {
                         temp.Children[j].Item1.Weight = temp.Weight + temp.Children[j].Item2;
-                        proc.Add(temp.Key);
                     }
                 }
+                proc.Add(temp.Key);
                 if (procR.Contains(temp.Key))
                 {
                     return ShortestPath(startNode, graphList, proc, endNode, graphListR, procR);
@@ -114,9 +132,9 @@ namespace A3
                     if (tempR.Weight + tempR.Parent[j].Item2 < tempR.Parent[j].Item1.Weight)//relax
                     {
                         tempR.Parent[j].Item1.Weight = tempR.Weight + tempR.Parent[j].Item2;
-                        procR.Add(tempR.Key);
                     }
                 }
+                procR.Add(tempR.Key);
 
                 if (proc.Contains(tempR.Key))
                 {
