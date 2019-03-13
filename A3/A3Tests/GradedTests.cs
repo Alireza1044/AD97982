@@ -1,5 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using A2;
+using A3;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,23 +7,26 @@ using System.Text;
 using System.Threading.Tasks;
 using TestCommon;
 
-namespace A2.Tests
+namespace A3.Tests
 {
     [TestClass()]
     public class GradedTests
     {
-        [TestMethod(), Timeout(4000)]
-        [DeploymentItem("TestData", "A2_TestData")]
+        [TestMethod(), Timeout(20000)]
+        //[TestMethod()]
+        [DeploymentItem("TestData", "A3_TestData")]
         public void SolveTest()
         {
             Processor[] problems = new Processor[] {
-                new Q1ShortestPath("TD1"),
-                new Q2BipartiteGraph("TD2")
+               new Q1MinCost("TD1"),
+               new Q2DetectingAnomalies("TD2"),
+               new Q3ExchangingMoney("TD3"),
+               new Q4FriendSuggestion("TD4")
             };
 
             foreach (var p in problems)
             {
-                TestTools.RunLocalTest("A2", p.Process, p.TestDataName, p.Verifier);
+                TestTools.RunLocalTest("A3", p.Process, p.TestDataName,p.Verifier);
             }
         }
     }
