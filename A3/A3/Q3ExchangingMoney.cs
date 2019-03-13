@@ -54,8 +54,6 @@ namespace A3
                     {
                         graph[key].IsChecked = true;
                         BFS(graph, graph[key]);
-                        //foreach (var i in graph[key].Children)
-                        //    i.Item1.IsChecked = true;
                     }
                     break;
                 }

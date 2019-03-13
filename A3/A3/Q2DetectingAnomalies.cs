@@ -16,7 +16,6 @@ namespace A3
 
         public long Solve(long nodeCount, long[][] edges)
         {
-            //Write Your Code Here
             Node[] graph = new Node[nodeCount + 1];
             Q1MinCost.BuildGraph(edges, graph);
             graph[1].Weight = 0;
