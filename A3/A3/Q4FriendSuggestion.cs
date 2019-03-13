@@ -14,44 +14,50 @@ namespace A3
         public override string Process(string inStr) =>
             TestTools.Process(inStr, (Func<long, long, long[][], long, long[][], long[]>)Solve);
         public const long Max = 2_000_000_000;
-        public struct Node
+
+        public struct Child
         {
-            public List<(Node, long)> Children { get; set; }
-            public List<(Node, long)> Parent { get; set; }
             public long Weight { get; set; }
-            public int Key { get; set; }
-            public bool IsChecked { get; set; }
-            public Node(int key=0)
+            public int Destination { get; set; }
+            public Child(int destination,long weight)
             {
-                Children = new List<(Node, long)>();
-                Parent = new List<(Node, long)>();
-                Weight = Max;
-                Key = key;
-                IsChecked = false;
-            }
-            public Node(int key, List<(Node, long)> children, List<(Node, long)> parent,long weight,bool isChecked)
-            {
-                Children = children;
-                Parent = parent;
                 Weight = weight;
-                Key = key;
-                IsChecked = isChecked;
+                Destination = destination;
             }
         }
+
+        public struct Node
+        {
+            public long Distance { get; set; }
+            public bool IsChecked { get; set; }
+            public int Key { get; set; }
+            public List<Child> Children { get; set; }
+            //public List<Child> Parents { get; set; }
+            public Node(int key,long distance = Max,bool isChecked = false)
+            {
+                Key = key;
+                Distance = distance;
+                IsChecked = isChecked;
+                Children = new List<Child>();
+                //Parents = new List<Child>();
+            }
+        }
+        
 
         public long[] Solve(long NodeCount, long EdgeCount,
                               long[][] edges, long QueriesCount,
                               long[][] Queries)
         {
 
-            Node[] graph = new Node[NodeCount + 1];
-            Node[] graphR = new Node[NodeCount + 1];
+            //Node[] graph = new Node[NodeCount + 1];
+            //Node[] graphR = new Node[NodeCount + 1];
             List<long> result = new List<long>();
+
+            Node[] graph = new Node[NodeCount+1];
+            Node[] graphR = new Node[NodeCount + 1];
 
             BuildGraph(edges,ref graph);
             BuildReverseGraph(edges,ref graphR);
-
-            
 
             for (int i = 0; i < QueriesCount; i++)
             {
@@ -66,7 +72,7 @@ namespace A3
                 //List<Node> graphList = graph.ToList();
                 //List<Node> graphListR = graphR.ToList();              
 
-                result.Add(BiDirectionalDijkstra(graph,graphR, Queries[i][0], Queries[i][1]));
+                result.Add(BiDirectionalDijkstra(graph,graphR,Queries[i][0], Queries[i][1]));
             }
             return result.ToArray();
         }
@@ -76,9 +82,10 @@ namespace A3
             {
                 graph[i] = new Node(i);
             }
+
             for (int i = 0; i < edges.GetLength(0); i++)
             {
-                graph[edges[i][0]].Children.Add((graph[edges[i][1]], edges[i][2]));
+                graph[edges[i][0]].Children.Add(new Child((int)edges[i][1], edges[i][2]));
             }
         }
         public static void BuildReverseGraph(long[][] edges,ref Node[] graph)
@@ -89,127 +96,90 @@ namespace A3
             }
             for (int i = 0; i < edges.GetLength(0); i++)
             {
-                graph[edges[i][1]].Parent.Add((graph[edges[i][0]], edges[i][2]));
+                graph[edges[i][1]].Children.Add(new Child((int)edges[i][0], edges[i][2]));
             }
         }
 
-        public long BiDirectionalDijkstra(Node[] Graph,Node[] GraphR ,long startNode, long endNode)
+        public long BiDirectionalDijkstra(Node[] Graph, Node[] GraphR, long startNode, long endNode)
         {
-            List<int> proc = new List<int>();
-            List<int> procR = new List<int>();
+            if (startNode == endNode)
+                return 0;
 
-            var graphDict = Graph.ToDictionary(x => x.Key);
-            var reverseGraphDict = GraphR.ToDictionary(x => x.Key);
+            bool[] proc = new bool[Graph.Length];
+            bool[] procR = new bool[Graph.Length];
 
-            graphDict.Remove(0);
-            reverseGraphDict.Remove(0);
-
-            graphDict[(int)startNode] = new Node(Graph[startNode].Key, Graph[startNode].Children,
-                Graph[startNode].Parent,0, Graph[startNode].IsChecked);
-            reverseGraphDict[(int)endNode] = new Node(GraphR[endNode].Key, GraphR[endNode].Children,
-                GraphR[endNode].Parent,0, GraphR[endNode].IsChecked);
+            Graph[(int)startNode].Distance = 0;
+            GraphR[(int)endNode].Distance = 0;
 
             while (true)
             {
-                Node temp = new Node(0);
-                Node tempR = new Node(0);
 
-                if (Graph.Length != 0)
-                    graphDict = graphDict.OrderBy(x => x.Value.Weight).ToDictionary(x => x.Key, x => x.Value);
+                int tempKey = FindMin(Graph,proc);
 
-                //for (int j = 0; j < Graph.Length; j++)
-                //{
-                //    if (isChecked[Graph[j].Key].Item2 == false)
-                //    {
-                //        temp = Graph[j];
-                //        break;
-                //    }
-                //}
-                int tempKey = graphDict.First(x => !x.Value.IsChecked).Key;
-                temp = Graph[tempKey];
-                //Graph[tempKey].IsChecked = true;
-                graphDict[tempKey] = 
-                    new Node(graphDict[tempKey].Key, graphDict[tempKey].Children, graphDict[tempKey].Parent, graphDict[tempKey].Weight,true);
-                
+                var temp = Graph[tempKey];
+
                 for (int j = 0; j < temp.Children.Count(); j++)//process
                 {
-                    if (graphDict[temp.Key].Weight + graphDict[temp.Key].Children[j].Item2 < graphDict[temp.Children[j].Item1.Key].Weight)//relax
+                    if (temp.Distance + temp.Children[j].Weight < Graph[temp.Children[j].Destination].Distance)//relax
                     {
-                        //temp.Children[j].Item1.Weight = temp.Weight + temp.Children[j].Item2;
-                        //Graph[temp.Children[j].Item1.Key].Weight = 
-                        //    graphDict[temp.Key].Weight + graphDict[temp.Children[j].Item1.Key].Weight;
-                        graphDict[temp.Children[j].Item1.Key] = 
-                            new Node(graphDict[temp.Children[j].Item1.Key].Key, graphDict[temp.Children[j].Item1.Key].Children,
-                            graphDict[temp.Children[j].Item1.Key].Parent,
-                            graphDict[temp.Key].Weight + graphDict[temp.Key].Children[j].Item2,
-                            graphDict[temp.Children[j].Item1.Key].IsChecked);
-                        //Graph[temp.Children[j].Item1.Key];
+                        Graph[temp.Children[j].Destination].Distance = temp.Distance + temp.Children[j].Weight;
                     }
                 }
-                proc.Add(temp.Key);
-                if (procR.Contains(temp.Key))
+                proc[tempKey] = true;
+                if (procR[tempKey])
                 {
-                    return ShortestPath(startNode, graphDict, proc, endNode, reverseGraphDict, procR);
+                    return ShortestPath(startNode, Graph, proc, endNode, GraphR, procR);
                 }
 
                 //do the same for Reverse
+                int tempRKey = FindMin(GraphR, procR);
 
-                if (Graph.Length != 0)
-                    reverseGraphDict = reverseGraphDict.OrderBy(x => x.Value.Weight).ToDictionary(x => x.Key, x => x.Value);
+                var tempR = GraphR[tempRKey];
 
-                //for (int j = 0; j < Graph.Length; j++)
-                //{
-                //    if (isCheckedR[Graph[j].Key].Item2 == false)
-                //    {
-                //        tempR = Graph[j];
-                //        break;
-                //    }
-                //}
-
-                int tempRKey = reverseGraphDict.First(x => !x.Value.IsChecked).Key;
-                tempR = GraphR[tempRKey];
-                //GraphR[tempRKey].IsChecked = true;
-                reverseGraphDict[tempRKey] = 
-                    new Node(reverseGraphDict[tempRKey].Key, reverseGraphDict[tempRKey].Children, 
-                    reverseGraphDict[tempRKey].Parent, reverseGraphDict[tempRKey].Weight,true);
-
-                for (int j = 0; j < tempR.Parent.Count(); j++)//process
+                for (int j = 0; j < tempR.Children.Count(); j++)//process
                 {
-                    if (reverseGraphDict[tempR.Key].Weight + reverseGraphDict[tempR.Key].Parent[j].Item2 < reverseGraphDict[tempR.Parent[j].Item1.Key].Weight)//relax
+                    if (tempR.Distance + tempR.Children[j].Weight < Graph[tempR.Children[j].Destination].Distance)//relax
                     {
-                        //tempR.Parent[j].Item1.Weight = tempR.Weight + tempR.Parent[j].Item2;
-                        //GraphR[tempR.Children[j].Item1.Key].Weight =
-                        //    reverseGraphDict[tempR.Key].Weight + reverseGraphDict[tempR.Children[j].Item1.Key].Weight;
-                        reverseGraphDict[tempR.Parent[j].Item1.Key] = new Node(reverseGraphDict[tempR.Parent[j].Item1.Key].Key,
-                            reverseGraphDict[tempR.Parent[j].Item1.Key].Children, reverseGraphDict[tempR.Parent[j].Item1.Key].Parent,
-                            reverseGraphDict[tempR.Key].Weight + reverseGraphDict[tempR.Key].Parent[j].Item2,
-                            reverseGraphDict[tempR.Parent[j].Item1.Key].IsChecked);
+                        Graph[tempR.Children[j].Destination].Distance = tempR.Distance + tempR.Children[j].Weight;
                     }
                 }
-                procR.Add(tempR.Key);
+                procR[tempRKey] = true;
 
-                if (proc.Contains(tempR.Key))
+                if (proc[tempR.Key])
                 {
-                    return ShortestPath(startNode, graphDict, proc, endNode, reverseGraphDict, procR);
+                    return ShortestPath(startNode, Graph, proc, endNode, GraphR, procR);
                 }
 
             }
         }
 
+        private int FindMin(Node[] graph, bool[] proc)
+        {
+            long temp = long.MaxValue;
+            int idx = -1;
 
-        public long ShortestPath(long startNode, Dictionary<int, Node> graphDict, List<int> proc
-            , long endNode, Dictionary<int, Node> reverseGraphDict, List<int> procR)
+            for (int i = 1; i < graph.Length; i++)
+            {
+                if (graph[i].Distance < temp && !proc[i])
+                {
+                    temp = graph[i].Distance;
+                    idx = i;
+                }
+            }
+            return idx;
+        }
+
+        public long ShortestPath(long startNode, Node[] graph, bool[] proc
+            , long endNode, Node[] graphR, bool[] procR)
         {
             long distance = Max;
-            List<int> process = proc.Concat(procR).ToList();
-            //isChecked = isChecked.OrderBy(x => x.Key).ToDictionary(x=>x.Key,x=>x.Value);
-            //isCheckedR = isCheckedR.OrderBy(x => x.Key).ToDictionary(x=>x.Key,x=>x.Value);
 
-            foreach (var key in process)
+            for (int i = 1; i < proc.Length; i++)
             {
-                if (graphDict[key].Weight + reverseGraphDict[key].Weight < distance)
+                if(proc[i] || procR[i])
                 {
-                    distance = graphDict[key].Weight + reverseGraphDict[key].Weight;
+                    if (graph[i].Distance + graphR[i].Distance < distance)
+                        distance = graph[i].Distance + graphR[i].Distance;
                 }
             }
 
