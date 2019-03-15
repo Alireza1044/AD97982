@@ -41,12 +41,14 @@ namespace A4
             public double Distance { get; set; }
             public Coordinates CoOrds { get; set; }
             public bool IsInMST { get; set; }
+            public double Potential { get; set; }
             public Node(int key, long x = 0, long y = 0)
             {
                 Key = key;
                 Children = new List<Edge>();
                 Distance = Max;
                 IsInMST = false;
+                Potential = -1;
                 CoOrds = new Coordinates(x, y);
             }
         }

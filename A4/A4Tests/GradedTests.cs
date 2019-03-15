@@ -18,9 +18,9 @@ namespace A4.Tests
         public void SolveTest()
         {
             Processor[] problems = new Processor[] {
-               new Q1BuildingRoads("TD1"),
-               new Q2Clustering("TD2"),
-               //new Q3ComputeDistance("TD3")
+               //new Q1BuildingRoads("TD1"),
+               //new Q2Clustering("TD2"),
+               new Q3ComputeDistance("TD3")
             };
 
             foreach (var p in problems)
