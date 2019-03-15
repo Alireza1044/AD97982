@@ -19,7 +19,7 @@ namespace A4.Tests
         {
             Processor[] problems = new Processor[] {
                new Q1BuildingRoads("TD1"),
-               //new Q2Clustering("TD2"),
+               new Q2Clustering("TD2"),
                //new Q3ComputeDistance("TD3")
             };
 

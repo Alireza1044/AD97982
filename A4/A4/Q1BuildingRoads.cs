@@ -15,7 +15,7 @@ namespace A4
             public int Key { get; set; }
             public Coordinates Destination { get; set; }
             public double Weight { get; set; }
-            public Edge(int key,Coordinates destintation,double weight)
+            public Edge(int key, Coordinates destintation, double weight)
             {
                 Key = key;
                 Destination = destintation;
@@ -27,7 +27,7 @@ namespace A4
         {
             public double X;
             public double Y;
-            public Coordinates(double x,double y)
+            public Coordinates(double x, double y)
             {
                 X = x;
                 Y = y;
@@ -39,9 +39,9 @@ namespace A4
             public int Key { get; set; }
             public List<Edge> Children { get; set; }
             public double Distance { get; set; }
-            public Coordinates CoOrds{ get; set; }
+            public Coordinates CoOrds { get; set; }
             public bool IsInMST { get; set; }
-            public Node(int key,long x=0,long y=0)
+            public Node(int key, long x = 0, long y = 0)
             {
                 Key = key;
                 Children = new List<Edge>();
@@ -58,9 +58,8 @@ namespace A4
 
         public double Solve(long pointCount, long[][] points)
         {
-            //Write Your Code Here
             Node[] graph = new Node[pointCount];
-            BuildGraph(graph,points);
+            BuildGraph(graph, points);
             return BuildMST(graph);
         }
 
@@ -68,28 +67,28 @@ namespace A4
         {
             for (int i = 0; i < graph.Length; i++)
             {
-                graph[i] = new Node(i,points[i][0],points[i][1]);
+                graph[i] = new Node(i, points[i][0], points[i][1]);
             }
             for (int i = 0; i < graph.Length; i++)
             {
                 for (int j = i + 1; j < graph.Length; j++)
                 {
                     double distance = CalculateDistance(graph[i].CoOrds, graph[j].CoOrds);
-                    graph[i].Children.Add(new Edge(j,graph[j].CoOrds, distance));
-                    graph[j].Children.Add(new Edge(i,graph[i].CoOrds, distance));
+                    graph[i].Children.Add(new Edge(j, graph[j].CoOrds, distance));
+                    graph[j].Children.Add(new Edge(i, graph[i].CoOrds, distance));
                 }
             }
         }
 
-        private static double CalculateDistance(Coordinates startNode, Coordinates endNode)
+        public static double CalculateDistance(Coordinates startNode, Coordinates endNode)
         {
             var x2 = Math.Pow(startNode.X - endNode.X, 2);
-            var y2 = Math.Pow(startNode.Y - endNode.Y,2);
+            var y2 = Math.Pow(startNode.Y - endNode.Y, 2);
             var result = Math.Pow(x2 + y2, 0.5);
             return Math.Abs(result);
         }
 
-        public double BuildMST(Node[] graph)
+        private static double BuildMST(Node[] graph)
         {
             graph[0].Distance = 0;
             List<Node> mst = new List<Node>();
@@ -101,30 +100,30 @@ namespace A4
                 graph[minDist].IsInMST = true;
                 distance += graph[minDist].Distance;
             }
-            return Math.Round(distance,6);
+            return Math.Round(distance, 6);
         }
 
-        private int FindMinDistance(Node[] graph)
+        public static int FindMinDistance(Node[] graph)
         {
             double dist = Max;
             int index = -1;
             for (int i = 0; i < graph.Length; i++)
             {
-                if(graph[i].Distance < dist && !graph[i].IsInMST)
+                if (graph[i].Distance < dist && !graph[i].IsInMST)
                 {
                     dist = graph[i].Distance;
                     index = i;
                 }
             }
-            Relax(graph,graph[index]);
+            Relax(graph, graph[index]);
             return index;
         }
 
-        private void Relax(Node[] graph, Node node)
+        public static void Relax(Node[] graph, Node node)
         {
             foreach (var child in node.Children)
             {
-                if(child.Weight < graph[child.Key].Distance && !graph[child.Key].IsInMST)
+                if (child.Weight < graph[child.Key].Distance && !graph[child.Key].IsInMST)
                     graph[child.Key].Distance = child.Weight;
             }
         }

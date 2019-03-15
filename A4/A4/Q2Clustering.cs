@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TestCommon;
+using static A4.Q1BuildingRoads;
 
 namespace A4
 {
@@ -17,8 +18,23 @@ namespace A4
 
         public double Solve(long pointCount, long[][] points, long clusterCount)
         {
-            //Write Your Code Here
-            return 0;
+            Node[] graph = new Node[pointCount];
+            BuildGraph(graph, points);
+            return BuildMST(graph,clusterCount);
+        }
+
+        private static double BuildMST(Node[] graph,long clusterCount)
+        {
+            graph[0].Distance = 0;
+            List<Node> mst = new List<Node>();
+            while (mst.Count() < graph.Length)
+            {
+                var minDist = FindMinDistance(graph);
+                mst.Add(graph[minDist]);
+                graph[minDist].IsInMST = true;
+            }
+            mst = mst.OrderByDescending(x => x.Distance).ToList();
+            return Math.Round(mst[(int)(clusterCount)-2].Distance, 6);
         }
     }
 }
