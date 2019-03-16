@@ -31,7 +31,6 @@ namespace A4
             {
                 var startNode = queries[i][0];
                 var endNode = queries[i][1];
-                CalculatePotential(graph, graph[endNode]);
                 dist[0] = Max + 1;
                 for (int j = 1; j < dist.Length; j++)
                 {
@@ -43,14 +42,12 @@ namespace A4
             return result.ToArray();
         }
 
-        private void CalculatePotential(Node[] graph,Node endNode)
+        public static double CalculatePotential(Node[] graph, Node currentNode, Node endNode, double[] dist)
         {
-            for (int i = 1; i < graph.Length; i++)
-            {
-                var x2 = Math.Pow(endNode.CoOrds.X - graph[i].CoOrds.X, 2);
-                var y2 = Math.Pow(endNode.CoOrds.Y - graph[i].CoOrds.Y, 2);
-                graph[i].Potential = Math.Pow(x2 + y2, 0.5);
-            }
+            var x2 = Math.Pow(endNode.CoOrds.X - currentNode.CoOrds.X, 2);
+            var y2 = Math.Pow(endNode.CoOrds.Y - currentNode.CoOrds.Y, 2);
+            return Math.Pow(x2 + y2, 0.5) + dist[currentNode.Key];
+            
         }
 
         public static void BuildGraph(Node[] graph, long[][] points,long[][] edges)
@@ -70,47 +67,52 @@ namespace A4
             if (startNode == endNode)
                 return 0;
 
-            double result = 0;
-            List<int> path = new List<int>();
+            List<int> open = new List<int>();
+            List<int> closed = new List<int>();
             dist[startNode] = 0;
-            path.Add((int)startNode);
-            var temp = graph[startNode];
-            while (true)
+             graph[startNode].Potential = CalculatePotential(graph, graph[startNode], graph[endNode],dist);
+            open.Add((int)startNode);
+            
+            while (open.Any())
             {
+                var temp = FindMinNode(graph, open, dist);
+                if (temp.Key == endNode)
+                    return dist[temp.Key];
+                open.Remove(temp.Key);
+                closed.Add(temp.Key);
                 for (int i = 0; i < temp.Children.Count; i++)
                 {
-                    if(dist[temp.Key] + temp.Children[i].Weight < dist[temp.Children[i].Key] 
-                        && !isProcessed[temp.Children[i].Key])
-                        dist[temp.Children[i].Key] = dist[temp.Key] + temp.Children[i].Weight;
-                }
-                isProcessed[temp.Key] = true;
-                temp = FindMinNode(graph,temp, dist, isProcessed);
-                if (temp.Key == 0)
-                    break;
-                result = dist[temp.Key];
-                if (temp.Key == endNode)
-                    return result;
-                path.Add(temp.Key);
-            }
+                    if (closed.Contains(temp.Children[i].Key))
+                        continue;
 
+                    var tentative_dist = dist[temp.Key] + temp.Children[i].Weight;
+
+                    if (!open.Contains(temp.Children[i].Key))
+                        open.Add(temp.Children[i].Key);
+                    else if (tentative_dist >= dist[temp.Children[i].Key])
+                        continue;
+
+                    dist[temp.Children[i].Key] = tentative_dist;
+                    graph[temp.Children[i].Key].Potential = dist[temp.Children[i].Key] + CalculatePotential(graph,graph[temp.Children[i].Key],
+                        graph[endNode],dist);
+                }
+            }
             return -1;
         }
 
-        private static Node FindMinNode(Node[] graph, Node temp, double[] dist, bool[] isProcessed)
+        private static Node FindMinNode(Node[] graph, List<int> open, double[] dist)
         {
-            double distance = Max,potential = Max;
-            int idx = 0;
-            for (int i = 0; i < temp.Children.Count; i++)
+            double potential = Max;
+            int idx = -1;
+            for (int i = 0; i < open.Count; i++)
             {
-                var key = temp.Children[i].Key;
-                if (graph[key].Potential + dist[key] < potential && !isProcessed[key])
+                var key = graph[open[i]].Key;
+                if (graph[key].Potential< potential)
                 {
                     idx = key;
-                    potential = graph[key].Potential + dist[key];
-                    distance = dist[key];
+                    potential = graph[key].Potential;
                 }
             }
-            dist[idx] = distance;
             return graph[idx];
         }
     }
