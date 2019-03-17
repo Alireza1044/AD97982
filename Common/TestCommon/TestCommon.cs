@@ -11,12 +11,48 @@ namespace TestCommon
     {
         public static readonly char[] IgnoreChars = new char[] { '\n', '\r', ' ' };
         public static readonly char[] NewLineChars = new char[] { '\n', '\r' };
+		
+		public static string Process(string inStr, Func<string, long[]> solve)
+        {
+            var str = inStr.Trim(IgnoreChars);
+            return string.Join(" ", solve(str));
+        }
+
+        public static string Process(string inStr, Func<string, string> solve)
+        {
+            return solve(inStr.Trim(IgnoreChars));
+        }
+       
+ 	    public static string Process(string inStr, Func<string, string, string> solve)
+        {
+            var tokens = inStr.Split(NewLineChars);
+            var str1 = tokens[0];
+            var str2 = tokens[1];
+            return solve(str1, str2);
+        }
+
+        public static string Process(string inStr, Func<string, string[]> solve)
+        {
+            return string.Join("\n", solve(inStr));
+        }
+
+        public static string Process(string inStr, Func<string, long, string[], long[]> solve)
+        {
+            var toks = inStr.Split(NewLineChars);
+            var str1 = toks[0];
+            long cnt = long.Parse(toks[1]);
+            var strList = toks.Skip(2).ToArray();
+
+            return string.Join(" ", solve(str1, cnt, strList));
+        }
 
         public static void RunLocalTest(
             string AssignmentName,
             Func<string, string> Processor,
             string TestDataName,
-            Action<string, string> Verifier) =>
+            Action<string, string> Verifier,
+            bool VerifyResultWithoutOrder=false,
+            HashSet<int> excludedTestCases=null) =>
                             RunLocalTest(
                                     AssignmentName,
                                     Processor,
@@ -24,7 +60,10 @@ namespace TestCommon
                                     false,
                                     null,
                                     int.MaxValue,
-                                    Verifier ?? FileVerifier);
+                                    Verifier ?? (VerifyResultWithoutOrder ?
+                                        (Action<string, string>)FileVerifierIgnoreOrder :
+                                        (Action<string, string>)FileVerifier),
+                                    excludedTestCases);
 
         public static void RunLocalTest(
             string AssignmentName,
@@ -33,7 +72,8 @@ namespace TestCommon
             bool saveMode = false,
             string testDataPathOverride = null,
             int maxTestCases = int.MaxValue,
-            Action<string, string> Verifier = null)
+            Action<string, string> Verifier = null,
+            HashSet<int> excludedTestCases = null)
         {
             Verifier = Verifier ?? FileVerifier;
             string testDataPath = $"{AssignmentName}_TestData";
@@ -53,6 +93,13 @@ namespace TestCommon
             TimeSpan totalTime = new TimeSpan(0);
             foreach (var inFile in inFiles.OrderBy(x => FileNumber(x)))
             {
+                if (excludedTestCases != null &&
+                    excludedTestCases.Contains(FileNumber(inFile)))
+                {
+                    Console.WriteLine($"Excluding test case: {Path.GetFileName(inFile)}");
+                    continue;
+                }
+
                 if (++testCaseNumber > maxTestCases)
                     break;
 
@@ -94,14 +141,31 @@ namespace TestCommon
             Console.WriteLine($"All {inFiles.Length} tests passed: {totalTime.ToString()}.");
         }
 
-        private static void FileVerifier(string inputFileName, string testResult)
+        private static void FileVerifier(string inputFileName, string testResult) =>
+            FileVerifierSpecifyOrder(inputFileName, testResult, false);
+
+        private static void FileVerifierIgnoreOrder(string inputFileName, string testResult) =>
+            FileVerifierSpecifyOrder(inputFileName, testResult, true);
+
+        private static void FileVerifierSpecifyOrder(string inputFileName, string testResult, bool ignoreOrder)
         {
             string outFile = inputFileName.Replace("In_", "Out_");
             Assert.IsTrue(File.Exists(outFile));
-            string expectedResult = string.Join("\n", File.ReadAllLines(outFile)
+
+            var expectedLines = File.ReadAllLines(outFile)
                 .Select(line => line.Trim(IgnoreChars)) // Ignore white spaces 
-                .Where(line => !string.IsNullOrWhiteSpace(line))); // Ignore empty lines
-            Assert.AreEqual(expectedResult, testResult);
+                .Where(line => !string.IsNullOrWhiteSpace(line)); // Ignore empty lines
+
+            if (ignoreOrder)
+            {
+                expectedLines = expectedLines.OrderBy(x => x);
+                testResult = string.Join("\n",
+                    testResult.Split(NewLineChars, StringSplitOptions.RemoveEmptyEntries)
+                              .OrderBy(x => x));
+            }
+            string expectedResult = string.Join("\n", expectedLines);
+
+            Assert.AreEqual(expectedResult, testResult, $"TestCase:{Path.GetFileName(inputFileName)}");
         }
 
         private static int FileNumber(string fileName)
