@@ -25,7 +25,7 @@ namespace TestCommon
        
  	    public static string Process(string inStr, Func<string, string, string> solve)
         {
-            var tokens = inStr.Split(NewLineChars);
+            var tokens = inStr.Split(NewLineChars, StringSplitOptions.RemoveEmptyEntries);
             var str1 = tokens[0];
             var str2 = tokens[1];
             return solve(str1, str2);
@@ -38,7 +38,7 @@ namespace TestCommon
 
         public static string Process(string inStr, Func<string, long, string[], long[]> solve)
         {
-            var toks = inStr.Split(NewLineChars);
+            var toks = inStr.Split(NewLineChars, StringSplitOptions.RemoveEmptyEntries);
             var str1 = toks[0];
             long cnt = long.Parse(toks[1]);
             var strList = toks.Skip(2).ToArray();
