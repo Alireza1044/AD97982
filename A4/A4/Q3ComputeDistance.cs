@@ -67,28 +67,34 @@ namespace A4
             if (startNode == endNode)
                 return 0;
 
-            List<int> open = new List<int>();
-            List<int> closed = new List<int>();
+            bool[] open = new bool[graph.Length];
+            bool[] closed = new bool[graph.Length];
+            int openCount = 0;
             dist[startNode] = 0;
-             graph[startNode].Potential = CalculatePotential(graph, graph[startNode], graph[endNode],dist);
-            open.Add((int)startNode);
-            
-            while (open.Any())
+            graph[startNode].Potential = CalculatePotential(graph, graph[startNode], graph[endNode],dist);
+            open[(int)startNode] = true;
+            openCount++;
+
+            while (openCount > 0) 
             {
                 var temp = FindMinNode(graph, open, dist);
                 if (temp.Key == endNode)
                     return dist[temp.Key];
-                open.Remove(temp.Key);
-                closed.Add(temp.Key);
+                open[temp.Key] = false;
+                openCount--;
+                closed[temp.Key] = true;
                 for (int i = 0; i < temp.Children.Count; i++)
                 {
-                    if (closed.Contains(temp.Children[i].Key))
+                    if (closed[temp.Children[i].Key])
                         continue;
 
                     var tentative_dist = dist[temp.Key] + temp.Children[i].Weight;
 
-                    if (!open.Contains(temp.Children[i].Key))
-                        open.Add(temp.Children[i].Key);
+                    if (!open[temp.Children[i].Key])
+                    {
+                        open[temp.Children[i].Key] = true;
+                        openCount++;
+                    }
                     else if (tentative_dist >= dist[temp.Children[i].Key])
                         continue;
 
@@ -100,17 +106,20 @@ namespace A4
             return -1;
         }
 
-        private static Node FindMinNode(Node[] graph, List<int> open, double[] dist)
+        private static Node FindMinNode(Node[] graph, bool[] open, double[] dist)
         {
             double potential = Max;
             int idx = -1;
-            for (int i = 0; i < open.Count; i++)
+            for (int i = 1; i < open.Length; i++)
             {
-                var key = graph[open[i]].Key;
-                if (graph[key].Potential< potential)
+                if (open[i])
                 {
-                    idx = key;
-                    potential = graph[key].Potential;
+                    var key = graph[i].Key;
+                    if (graph[key].Potential < potential)
+                    {
+                        idx = key;
+                        potential = graph[key].Potential;
+                    }
                 }
             }
             return graph[idx];
