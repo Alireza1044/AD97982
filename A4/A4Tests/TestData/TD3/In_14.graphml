@@ -14,7 +14,7 @@
     <edge id="e7_1" vertex1="7" vertex2="1" text="5" weight="5" isDirect="true" model_type="0" model_curvedValue="1" />
     <edge id="e3_6" vertex1="3" vertex2="6" text="5" weight="5" isDirect="true" model_type="0" model_curvedValue="1" />
     <edge id="e4_5" vertex1="4" vertex2="5" text="5" weight="5" isDirect="true" model_type="0" model_curvedValue="1" />
-    <edge id="e7_8" vertex1="7" vertex2="8" text="4" weight="4" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e7_8" vertex1="7" vertex2="8" text="3" weight="3" isDirect="true" model_type="0" model_curvedValue="1" />
     <edge id="e5_2" vertex1="5" vertex2="2" text="7" weight="7" isDirect="true" model_type="0" model_curvedValue="1" />
     <edge id="e6_4" vertex1="6" vertex2="4" text="4" weight="4" isDirect="true" model_type="0" model_curvedValue="1" />
     <edge id="e5_7" vertex1="5" vertex2="7" text="7" weight="7" isDirect="true" model_type="0" model_curvedValue="1" />
@@ -25,9 +25,9 @@
     <edge id="e1_5" vertex1="1" vertex2="5" text="6" weight="6" isDirect="true" model_type="0" model_curvedValue="1" />
     <edge id="e7_4" vertex1="7" vertex2="4" text="7" weight="7" isDirect="true" model_type="0" model_curvedValue="1" />
     <edge id="e5_4" vertex1="5" vertex2="4" text="5" weight="5" isDirect="true" model_type="0" model_curvedValue="1" />
-    <edge id="e4_1" vertex1="4" vertex2="1" text="4" weight="4" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e4_1" vertex1="4" vertex2="1" text="3" weight="3" isDirect="true" model_type="0" model_curvedValue="1" />
     <edge id="e5_6" vertex1="5" vertex2="6" text="7" weight="7" isDirect="true" model_type="0" model_curvedValue="1" />
-    <edge id="e6_1" vertex1="6" vertex2="1" text="3" weight="3" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e6_1" vertex1="6" vertex2="1" text="2" weight="2" isDirect="true" model_type="0" model_curvedValue="1" />
     <edge id="e8_7" vertex1="8" vertex2="7" text="3" weight="3" isDirect="true" model_type="0" model_curvedValue="1" />
     <edge id="e7_6" vertex1="7" vertex2="6" text="6" weight="6" isDirect="true" model_type="0" model_curvedValue="1" />
     <edge id="e8_3" vertex1="8" vertex2="3" text="4" weight="4" isDirect="true" model_type="0" model_curvedValue="1" />

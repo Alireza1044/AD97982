@@ -17,7 +17,7 @@
     <edge id="e8_3" vertex1="8" vertex2="3" text="4" weight="4" isDirect="true" model_type="0" model_curvedValue="1" />
     <edge id="e1_4" vertex1="1" vertex2="4" text="3" weight="3" isDirect="true" model_type="0" model_curvedValue="1" />
     <edge id="e6_1" vertex1="6" vertex2="1" text="2" weight="2" isDirect="true" model_type="0" model_curvedValue="1" />
-    <edge id="e3_7" vertex1="3" vertex2="7" text="3" weight="3" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e3_7" vertex1="3" vertex2="7" text="2" weight="2" isDirect="true" model_type="0" model_curvedValue="1" />
     <edge id="e4_3" vertex1="4" vertex2="3" text="4" weight="4" isDirect="true" model_type="0" model_curvedValue="1" />
     <edge id="e6_8" vertex1="6" vertex2="8" text="8" weight="8" isDirect="true" model_type="0" model_curvedValue="1" />
     <edge id="e1_3" vertex1="1" vertex2="3" text="3" weight="3" isDirect="true" model_type="0" model_curvedValue="1" />

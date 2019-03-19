@@ -16,14 +16,14 @@
     <edge id="e3_8" vertex1="3" vertex2="8" text="4" weight="4" isDirect="true" model_type="0" model_curvedValue="1" />
     <edge id="e5_7" vertex1="5" vertex2="7" text="8" weight="8" isDirect="true" model_type="0" model_curvedValue="1" />
     <edge id="e7_5" vertex1="7" vertex2="5" text="7" weight="7" isDirect="true" model_type="0" model_curvedValue="1" />
-    <edge id="e6_1" vertex1="6" vertex2="1" text="3" weight="3" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e6_1" vertex1="6" vertex2="1" text="2" weight="2" isDirect="true" model_type="0" model_curvedValue="1" />
     <edge id="e7_8" vertex1="7" vertex2="8" text="3" weight="3" isDirect="true" model_type="0" model_curvedValue="1" />
     <edge id="e4_3" vertex1="4" vertex2="3" text="4" weight="4" isDirect="true" model_type="0" model_curvedValue="1" />
     <edge id="e8_2" vertex1="8" vertex2="2" text="6" weight="6" isDirect="true" model_type="0" model_curvedValue="1" />
     <edge id="e2_5" vertex1="2" vertex2="5" text="6" weight="6" isDirect="true" model_type="0" model_curvedValue="1" />
     <edge id="e8_1" vertex1="8" vertex2="1" text="7" weight="7" isDirect="true" model_type="0" model_curvedValue="1" />
-    <edge id="e3_7" vertex1="3" vertex2="7" text="3" weight="3" isDirect="true" model_type="0" model_curvedValue="1" />
-    <edge id="e4_1" vertex1="4" vertex2="1" text="4" weight="4" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e3_7" vertex1="3" vertex2="7" text="2" weight="2" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e4_1" vertex1="4" vertex2="1" text="3" weight="3" isDirect="true" model_type="0" model_curvedValue="1" />
     <edge id="e7_1" vertex1="7" vertex2="1" text="4" weight="4" isDirect="true" model_type="0" model_curvedValue="1" />
     <edge id="e1_2" vertex1="1" vertex2="2" text="8" weight="8" isDirect="true" model_type="0" model_curvedValue="1" />
     <edge id="e2_7" vertex1="2" vertex2="7" text="6" weight="6" isDirect="true" model_type="0" model_curvedValue="1" />

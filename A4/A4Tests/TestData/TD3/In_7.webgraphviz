@@ -22,14 +22,14 @@ digraph G {
    "2" -> "1" [label="4", color="#808000", fontcolor="#808000"];
    "3" -> "1" [label="7", color="#ffe119", fontcolor="#ffe119"];
    "3" -> "5" [label="5", color="#46f0f0", fontcolor="#46f0f0"];
-   "6" -> "3" [label="4", color="#911eb4", fontcolor="#911eb4"];
-   "6" -> "5" [label="4", color="#f032e6", fontcolor="#f032e6"];
-   "5" -> "6" [label="4", color="#3cb44b", fontcolor="#3cb44b"];
+   "6" -> "3" [label="3", color="#911eb4", fontcolor="#911eb4"];
+   "6" -> "5" [label="3", color="#f032e6", fontcolor="#f032e6"];
+   "5" -> "6" [label="3", color="#3cb44b", fontcolor="#3cb44b"];
    "4" -> "6" [label="5", color="#aaffc3", fontcolor="#aaffc3"];
    "5" -> "4" [label="4", color="#000000", fontcolor="#000000"];
-   "3" -> "6" [label="4", color="#f032e6", fontcolor="#f032e6"];
-   "1" -> "4" [label="4", color="#e6beff", fontcolor="#e6beff"];
+   "3" -> "6" [label="3", color="#f032e6", fontcolor="#f032e6"];
+   "1" -> "4" [label="3", color="#e6beff", fontcolor="#e6beff"];
    "4" -> "5" [label="5", color="#800000", fontcolor="#800000"];
-   "4" -> "1" [label="4", color="#fabebe", fontcolor="#fabebe"];
+   "4" -> "1" [label="3", color="#fabebe", fontcolor="#fabebe"];
    "5" -> "3" [label="5", color="#808080", fontcolor="#808080"];
 }

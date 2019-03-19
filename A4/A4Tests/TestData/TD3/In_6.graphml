@@ -11,18 +11,18 @@
     <edge id="e3_5" vertex1="3" vertex2="5" text="5" weight="5" isDirect="true" model_type="0" model_curvedValue="1" />
     <edge id="e1_3" vertex1="1" vertex2="3" text="6" weight="6" isDirect="true" model_type="0" model_curvedValue="1" />
     <edge id="e4_1" vertex1="4" vertex2="1" text="2" weight="2" isDirect="true" model_type="0" model_curvedValue="1" />
-    <edge id="e2_4" vertex1="2" vertex2="4" text="3" weight="3" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e2_4" vertex1="2" vertex2="4" text="2" weight="2" isDirect="true" model_type="0" model_curvedValue="1" />
     <edge id="e3_4" vertex1="3" vertex2="4" text="5" weight="5" isDirect="true" model_type="0" model_curvedValue="1" />
-    <edge id="e5_1" vertex1="5" vertex2="1" text="3" weight="3" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e5_1" vertex1="5" vertex2="1" text="2" weight="2" isDirect="true" model_type="0" model_curvedValue="1" />
     <edge id="e3_1" vertex1="3" vertex2="1" text="5" weight="5" isDirect="true" model_type="0" model_curvedValue="1" />
-    <edge id="e1_5" vertex1="1" vertex2="5" text="3" weight="3" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e1_5" vertex1="1" vertex2="5" text="2" weight="2" isDirect="true" model_type="0" model_curvedValue="1" />
     <edge id="e4_3" vertex1="4" vertex2="3" text="5" weight="5" isDirect="true" model_type="0" model_curvedValue="1" />
-    <edge id="e4_2" vertex1="4" vertex2="2" text="3" weight="3" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e4_2" vertex1="4" vertex2="2" text="2" weight="2" isDirect="true" model_type="0" model_curvedValue="1" />
     <edge id="e5_3" vertex1="5" vertex2="3" text="4" weight="4" isDirect="true" model_type="0" model_curvedValue="1" />
-    <edge id="e1_2" vertex1="1" vertex2="2" text="4" weight="4" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e1_2" vertex1="1" vertex2="2" text="3" weight="3" isDirect="true" model_type="0" model_curvedValue="1" />
     <edge id="e2_1" vertex1="2" vertex2="1" text="3" weight="3" isDirect="true" model_type="0" model_curvedValue="1" />
-    <edge id="e4_5" vertex1="4" vertex2="5" text="3" weight="3" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e4_5" vertex1="4" vertex2="5" text="2" weight="2" isDirect="true" model_type="0" model_curvedValue="1" />
     <edge id="e1_4" vertex1="1" vertex2="4" text="2" weight="2" isDirect="true" model_type="0" model_curvedValue="1" />
-    <edge id="e2_3" vertex1="2" vertex2="3" text="4" weight="4" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e2_3" vertex1="2" vertex2="3" text="3" weight="3" isDirect="true" model_type="0" model_curvedValue="1" />
   </graph> 
 </graphml>

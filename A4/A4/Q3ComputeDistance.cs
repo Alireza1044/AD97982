@@ -14,7 +14,7 @@ namespace A4
         public Q3ComputeDistance(string testDataName) : base(testDataName) { }
 
         public override string Process(string inStr) =>
-            TestTools.Process(inStr, (Func<long,long, long[][], long[][], long, long[][], long[]>)Solve);
+            TestTools.Process(inStr, (Func<long, long, long[][], long[][], long, long[][], long[]>)Solve);
 
 
         public long[] Solve(long nodeCount,
@@ -53,14 +53,14 @@ namespace A4
             var x2 = Math.Pow(endNode.CoOrds.X - currentNode.CoOrds.X, 2);
             var y2 = Math.Pow(endNode.CoOrds.Y - currentNode.CoOrds.Y, 2);
             return Math.Pow(x2 + y2, 0.5) + dist[currentNode.Key];
-            
+
         }
 
-        public static void BuildGraph(Node[] graph, long[][] points,long[][] edges)
+        public static void BuildGraph(Node[] graph, long[][] points, long[][] edges)
         {
             for (int i = 1; i < graph.Length; i++)
             {
-                graph[i] = new Node(i, points[i-1][0], points[i-1][1]);
+                graph[i] = new Node(i, points[i - 1][0], points[i - 1][1]);
             }
             for (int i = 0; i < edges.GetLength(0); i++)
             {
@@ -68,7 +68,7 @@ namespace A4
             }
         }
 
-        public static double CalculateDistance(Node[] graph, long startNode,long endNode,double[] dist,bool[] isProcessed)
+        public static double CalculateDistance(Node[] graph, long startNode, long endNode, double[] dist, bool[] isProcessed)
         {
             if (startNode == endNode)
                 return 0;
@@ -77,11 +77,11 @@ namespace A4
             bool[] closed = new bool[graph.Length];
             int openCount = 0;
             dist[startNode] = 0;
-            graph[startNode].Potential = CalculatePotential(graph, graph[startNode], graph[endNode],dist);
+            graph[startNode].Potential = CalculatePotential(graph, graph[startNode], graph[endNode], dist);
             open[(int)startNode] = true;
             openCount++;
 
-            while (openCount > 0) 
+            while (openCount > 0)
             {
                 var temp = FindMinNode(graph, open, dist);
                 if (temp.Key == endNode)
@@ -105,8 +105,8 @@ namespace A4
                         continue;
 
                     dist[temp.Children[i].Key] = tentative_dist;
-                    graph[temp.Children[i].Key].Potential = dist[temp.Children[i].Key] + CalculatePotential(graph,graph[temp.Children[i].Key],
-                        graph[endNode],dist);
+                    graph[temp.Children[i].Key].Potential = dist[temp.Children[i].Key] + CalculatePotential(graph, graph[temp.Children[i].Key],
+                        graph[endNode], dist);
                 }
             }
             return -1;
