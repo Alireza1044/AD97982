@@ -11,7 +11,7 @@ namespace TestCommon
     {
         public static readonly char[] IgnoreChars = new char[] { '\n', '\r', ' ' };
         public static readonly char[] NewLineChars = new char[] { '\n', '\r' };
-
+        //public static string outs = null;
         public static void RunLocalTest(
             string AssignmentName,
             Func<string, string> Processor,
@@ -35,6 +35,7 @@ namespace TestCommon
             int maxTestCases = int.MaxValue,
             Action<string, string> Verifier = null)
         {
+
             Verifier = Verifier ?? FileVerifier;
             string testDataPath = $"{AssignmentName}_TestData";
             if (!string.IsNullOrEmpty(TestDataName))
@@ -45,7 +46,7 @@ namespace TestCommon
 
             Assert.IsTrue(Directory.Exists(testDataPath));
             string[] inFiles = Directory.GetFiles(testDataPath, "*In_*.txt");
-
+            
             Assert.IsTrue(inFiles.Length > 0);
 
             int testCaseNumber = 0;
@@ -55,7 +56,7 @@ namespace TestCommon
             {
                 if (++testCaseNumber > maxTestCases)
                     break;
-
+                //outs = inFile;
                 Stopwatch sw;
                 string outFile;
                 try

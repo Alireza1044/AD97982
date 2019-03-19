@@ -1,0 +1,16 @@
+/* You can visualize the graph with: 
+https://dreampuf.github.io/GraphvizOnline/  Set Engine to fdp
+https://graphviz.herokuapp.com/ 
+http://www.webgraphviz.com/ 
+
+Also if the graph layout doesn't look good try
+changing the splines setting below to:
+ortho, curved, line, polyline, spline */
+
+digraph G {
+   graph[splines = "curved"];
+   node[height = 0.1, width = 0.1];
+   "1" [pos="0,0!"];
+   "2" [pos="0,1!"];
+   "1" -> "2" [label="1", color="#fabebe", fontcolor="#fabebe"];
+}

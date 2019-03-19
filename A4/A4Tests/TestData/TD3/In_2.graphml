@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Use http://graphonline.ru/en/ for visualization --><graphml xmlns="http://graphml.graphdrawing.org/xmlns"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+  <graph id="G" edgedefault="directed">
+    <node id="1" positionX="0" positionY="1000" mainText="1" upText="" />
+    <node id="2" positionX="0" positionY="0" mainText="2" upText="" />
+    <node id="3" positionX="1000" positionY="0" mainText="3" upText="" />
+    <node id="4" positionX="1000" positionY="1000" mainText="4" upText="" />
+    <edge id="e1_2" vertex1="1" vertex2="2" text="1" weight="1" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e4_1" vertex1="4" vertex2="1" text="2" weight="2" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e2_3" vertex1="2" vertex2="3" text="2" weight="2" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e1_3" vertex1="1" vertex2="3" text="6" weight="6" isDirect="true" model_type="0" model_curvedValue="1" />
+  </graph> 
+</graphml>

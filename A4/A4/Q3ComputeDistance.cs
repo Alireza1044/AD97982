@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,6 +28,7 @@ namespace A4
             BuildGraph(graph, points, edges);
             double[] dist = new double[nodeCount + 1];
             List<long> result = new List<long>();
+            //List<string> res = new List<string>();
             for (int i = 0; i < queries.GetLength(0); i++)
             {
                 var startNode = queries[i][0];
@@ -37,8 +39,12 @@ namespace A4
                     dist[j] = Max;
                 }
                 bool[] isProcessed = new bool[nodeCount + 1];
-                result.Add((long)CalculateDistance(graph, startNode, endNode, dist, isProcessed));
+                var x = (long)CalculateDistance(graph, startNode, endNode, dist, isProcessed);
+                result.Add(x);
+                //res.Add(x.ToString());
             }
+            //var z = TestTools.outs.Split('_');
+            //File.WriteAllLines(@"..\..\..\NewFolder\Out_"+ z.Last(), res.ToArray());
             return result.ToArray();
         }
 
