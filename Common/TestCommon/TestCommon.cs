@@ -11,9 +11,6 @@ namespace TestCommon
     {
         public static readonly char[] IgnoreChars = new char[] { '\n', '\r', ' ' };
         public static readonly char[] NewLineChars = new char[] { '\n', '\r' };
-<<<<<<< HEAD
-        //public static string outs = null;
-=======
 		
 		public static string Process(string inStr, Func<string, long[]> solve)
         {
@@ -48,8 +45,6 @@ namespace TestCommon
 
             return string.Join(" ", solve(str1, cnt, strList));
         }
-
->>>>>>> origin/sauleh/TestCommon.A5
         public static void RunLocalTest(
             string AssignmentName,
             Func<string, string> Processor,
