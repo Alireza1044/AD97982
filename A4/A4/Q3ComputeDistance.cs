@@ -28,7 +28,7 @@ namespace A4
             BuildGraph(graph, points, edges);
             double[] dist = new double[nodeCount + 1];
             List<long> result = new List<long>();
-            //List<string> res = new List<string>();
+
             for (int i = 0; i < queries.GetLength(0); i++)
             {
                 var startNode = queries[i][0];
@@ -39,12 +39,8 @@ namespace A4
                     dist[j] = Max;
                 }
                 bool[] isProcessed = new bool[nodeCount + 1];
-                var x = (long)CalculateDistance(graph, startNode, endNode, dist, isProcessed);
-                result.Add(x);
-                //res.Add(x.ToString());
+                result.Add((long)CalculateDistance(graph, startNode, endNode, dist, isProcessed));
             }
-            //var z = TestTools.outs.Split('_');
-            //File.WriteAllLines(@"..\..\..\NewFolder\Out_"+ z.Last(), res.ToArray());
             return result.ToArray();
         }
 
@@ -89,7 +85,7 @@ namespace A4
 
             while (openCount > 0)
             {
-                temp = graph[heap.ExtractMin()];//extract min
+                temp = graph[heap.ExtractMin()];
 
                 if (temp.Key == endNode)
                     return dist[temp.Key];
@@ -97,6 +93,7 @@ namespace A4
                 open[temp.Key] = false;
                 openCount--;
                 closed[temp.Key] = true;
+
                 for (int i = 0; i < temp.Children.Count; i++)
                 {
                     if (closed[temp.Children[i].Key])

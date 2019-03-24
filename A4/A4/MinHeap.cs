@@ -21,18 +21,9 @@ namespace A4
             size = 0;
         }
 
-        public void Insert(int key,double priority)
-        {
-            Heap[size] = key;
-            Priorities[size] = priority;
-            SiftUp(size);
-            size++;
-        }
-
         public int ExtractMin()
         {
             var min = Heap[0];
-            //Heap[0] = Heap[size - 1];
             Swap(0, size - 1);
             size--;
             SiftDown(0);
