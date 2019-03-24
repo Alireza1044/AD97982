@@ -13,6 +13,23 @@ namespace TestCommon
 
         public virtual Action<string, string> Verifier { get; set; } = null;
 
+        public HashSet<int> ExcludedTestCases { get; protected set; } = 
+            new HashSet<int>();
+
+        protected void ExcludeTestCases(params int[] testCases)
+        {
+            foreach(var t in testCases)
+                ExcludedTestCases.Add(t);
+        }
+
+        protected void ExcludeTestCaseRangeInclusive(int l, int u)
+        {
+            for (int i = l; i <= u; i++)
+                ExcludedTestCases.Add(i);
+        }
+
+        public bool VerifyResultWithoutOrder { get; protected set; } = false;
+
         public Processor(string testDataName)
         {
             this.TestDataName = testDataName;
