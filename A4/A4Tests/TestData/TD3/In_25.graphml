@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Use http://graphonline.ru/en/ for visualization --><graphml xmlns="http://graphml.graphdrawing.org/xmlns"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+  <graph id="G" edgedefault="directed">
+    <node id="1" positionX="83" positionY="728" mainText="1" upText="" />
+    <node id="2" positionX="83" positionY="182" mainText="2" upText="" />
+    <node id="3" positionX="333" positionY="910" mainText="3" upText="" />
+    <node id="4" positionX="250" positionY="91" mainText="4" upText="" />
+    <node id="5" positionX="416" positionY="91" mainText="5" upText="" />
+    <node id="6" positionX="0" positionY="1000" mainText="6" upText="" />
+    <node id="7" positionX="83" positionY="91" mainText="7" upText="" />
+    <node id="8" positionX="583" positionY="364" mainText="8" upText="" />
+    <node id="9" positionX="583" positionY="455" mainText="9" upText="" />
+    <node id="10" positionX="833" positionY="455" mainText="10" upText="" />
+    <node id="11" positionX="83" positionY="0" mainText="11" upText="" />
+    <node id="12" positionX="1000" positionY="364" mainText="12" upText="" />
+    <node id="13" positionX="416" positionY="1000" mainText="13" upText="" />
+    <node id="14" positionX="416" positionY="910" mainText="14" upText="" />
+    <edge id="e9_4" vertex1="9" vertex2="4" text="7" weight="7" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e11_13" vertex1="11" vertex2="13" text="14" weight="14" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e3_13" vertex1="3" vertex2="13" text="2" weight="2" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e11_4" vertex1="11" vertex2="4" text="3" weight="3" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e9_5" vertex1="9" vertex2="5" text="6" weight="6" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e4_11" vertex1="4" vertex2="11" text="3" weight="3" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e9_3" vertex1="9" vertex2="3" text="6" weight="6" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e12_8" vertex1="12" vertex2="8" text="6" weight="6" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e10_13" vertex1="10" vertex2="13" text="9" weight="9" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e2_9" vertex1="2" vertex2="9" text="8" weight="8" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e10_8" vertex1="10" vertex2="8" text="4" weight="4" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e10_12" vertex1="10" vertex2="12" text="3" weight="3" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e5_14" vertex1="5" vertex2="14" text="12" weight="12" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e7_4" vertex1="7" vertex2="4" text="3" weight="3" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e8_9" vertex1="8" vertex2="9" text="2" weight="2" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e3_2" vertex1="3" vertex2="2" text="9" weight="9" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e11_6" vertex1="11" vertex2="6" text="14" weight="14" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e13_9" vertex1="13" vertex2="9" text="7" weight="7" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e3_6" vertex1="3" vertex2="6" text="6" weight="6" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e13_11" vertex1="13" vertex2="11" text="12" weight="12" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e2_1" vertex1="2" vertex2="1" text="7" weight="7" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e8_2" vertex1="8" vertex2="2" text="8" weight="8" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e10_9" vertex1="10" vertex2="9" text="5" weight="5" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e13_6" vertex1="13" vertex2="6" text="6" weight="6" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e2_5" vertex1="2" vertex2="5" text="6" weight="6" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e6_3" vertex1="6" vertex2="3" text="6" weight="6" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e9_10" vertex1="9" vertex2="10" text="5" weight="5" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e8_1" vertex1="8" vertex2="1" text="9" weight="9" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e7_2" vertex1="7" vertex2="2" text="2" weight="2" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e9_1" vertex1="9" vertex2="1" text="8" weight="8" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e12_13" vertex1="12" vertex2="13" text="10" weight="10" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e10_7" vertex1="10" vertex2="7" text="10" weight="10" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e1_12" vertex1="1" vertex2="12" text="13" weight="13" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e11_10" vertex1="11" vertex2="10" text="12" weight="12" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e11_14" vertex1="11" vertex2="14" text="13" weight="13" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e8_5" vertex1="8" vertex2="5" text="4" weight="4" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e13_12" vertex1="13" vertex2="12" text="11" weight="11" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e2_11" vertex1="2" vertex2="11" text="3" weight="3" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e10_11" vertex1="10" vertex2="11" text="11" weight="11" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e14_9" vertex1="14" vertex2="9" text="6" weight="6" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e5_2" vertex1="5" vertex2="2" text="6" weight="6" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e11_9" vertex1="11" vertex2="9" text="8" weight="8" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e6_13" vertex1="6" vertex2="13" text="7" weight="7" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e9_2" vertex1="9" vertex2="2" text="8" weight="8" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e2_7" vertex1="2" vertex2="7" text="2" weight="2" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e12_9" vertex1="12" vertex2="9" text="6" weight="6" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e14_5" vertex1="14" vertex2="5" text="12" weight="12" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e8_12" vertex1="8" vertex2="12" text="7" weight="7" isDirect="true" model_type="0" model_curvedValue="1" />
+  </graph> 
+</graphml>

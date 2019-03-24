@@ -1,0 +1,63 @@
+/* You can visualize the graph with: 
+https://dreampuf.github.io/GraphvizOnline/  Set Engine to fdp
+https://graphviz.herokuapp.com/ 
+http://www.webgraphviz.com/ 
+
+Also if the graph layout doesn't look good try
+changing the splines setting below to:
+ortho, curved, line, polyline, spline */
+
+digraph G {
+   graph[splines = "curved"];
+   node[height = 0.1, width = 0.1];
+   "1" [pos="-1,-1!"];
+   "2" [pos="1,-3!"];
+   "3" [pos="-4,-3!"];
+   "4" [pos="6,5!"];
+   "5" [pos="6,-5!"];
+   "6" [pos="3,-5!"];
+   "7" [pos="2,-1!"];
+   "8" [pos="-6,3!"];
+   "9" [pos="1,1!"];
+   "10" [pos="0,-2!"];
+   "11" [pos="-4,-4!"];
+   "12" [pos="-5,4!"];
+   "13" [pos="4,-1!"];
+   "12" -> "2" [label="12", color="#46f0f0", fontcolor="#46f0f0"];
+   "6" -> "10" [label="5", color="#9a6324", fontcolor="#9a6324"];
+   "6" -> "13" [label="6", color="#808000", fontcolor="#808000"];
+   "11" -> "6" [label="9", color="#4363d8", fontcolor="#4363d8"];
+   "5" -> "1" [label="11", color="#ffd8b1", fontcolor="#ffd8b1"];
+   "4" -> "12" [label="12", color="#e6194b", fontcolor="#e6194b"];
+   "13" -> "10" [label="5", color="#3cb44b", fontcolor="#3cb44b"];
+   "3" -> "6" [label="9", color="#f032e6", fontcolor="#f032e6"];
+   "11" -> "10" [label="6", color="#f032e6", fontcolor="#f032e6"];
+   "6" -> "9" [label="7", color="#e6beff", fontcolor="#e6beff"];
+   "4" -> "9" [label="8", color="#000075", fontcolor="#000075"];
+   "13" -> "1" [label="7", color="#9a6324", fontcolor="#9a6324"];
+   "13" -> "7" [label="3", color="#808080", fontcolor="#808080"];
+   "9" -> "5" [label="8", color="#bcf60c", fontcolor="#bcf60c"];
+   "9" -> "4" [label="8", color="#f032e6", fontcolor="#f032e6"];
+   "11" -> "5" [label="12", color="#ffe119", fontcolor="#ffe119"];
+   "12" -> "10" [label="8", color="#aaffc3", fontcolor="#aaffc3"];
+   "7" -> "4" [label="9", color="#800000", fontcolor="#800000"];
+   "11" -> "2" [label="6", color="#000000", fontcolor="#000000"];
+   "1" -> "3" [label="4", color="#008080", fontcolor="#008080"];
+   "13" -> "6" [label="5", color="#000075", fontcolor="#000075"];
+   "10" -> "12" [label="8", color="#ffe119", fontcolor="#ffe119"];
+   "10" -> "11" [label="5", color="#3cb44b", fontcolor="#3cb44b"];
+   "12" -> "8" [label="2", color="#9a6324", fontcolor="#9a6324"];
+   "2" -> "8" [label="12", color="#ffe119", fontcolor="#ffe119"];
+   "2" -> "11" [label="7", color="#911eb4", fontcolor="#911eb4"];
+   "4" -> "13" [label="7", color="#3cb44b", fontcolor="#3cb44b"];
+   "12" -> "13" [label="13", color="#000075", fontcolor="#000075"];
+   "2" -> "10" [label="2", color="#f58231", fontcolor="#f58231"];
+   "8" -> "13" [label="12", color="#fabebe", fontcolor="#fabebe"];
+   "10" -> "1" [label="2", color="#e6beff", fontcolor="#e6beff"];
+   "12" -> "1" [label="8", color="#911eb4", fontcolor="#911eb4"];
+   "4" -> "7" [label="9", color="#808000", fontcolor="#808000"];
+   "9" -> "13" [label="4", color="#ffd8b1", fontcolor="#ffd8b1"];
+   "9" -> "1" [label="3", color="#f58231", fontcolor="#f58231"];
+   "7" -> "2" [label="3", color="#e6beff", fontcolor="#e6beff"];
+   "6" -> "11" [label="9", color="#800000", fontcolor="#800000"];
+}

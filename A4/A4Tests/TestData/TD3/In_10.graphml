@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Use http://graphonline.ru/en/ for visualization --><graphml xmlns="http://graphml.graphdrawing.org/xmlns"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+  <graph id="G" edgedefault="directed">
+    <node id="1" positionX="0" positionY="500" mainText="1" upText="" />
+    <node id="2" positionX="0" positionY="0" mainText="2" upText="" />
+    <node id="3" positionX="1000" positionY="500" mainText="3" upText="" />
+    <node id="4" positionX="400" positionY="500" mainText="4" upText="" />
+    <node id="5" positionX="600" positionY="1000" mainText="5" upText="" />
+    <node id="6" positionX="1000" positionY="834" mainText="6" upText="" />
+    <node id="7" positionX="800" positionY="334" mainText="7" upText="" />
+    <edge id="e3_5" vertex1="3" vertex2="5" text="4" weight="4" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e4_7" vertex1="4" vertex2="7" text="3" weight="3" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e3_4" vertex1="3" vertex2="4" text="4" weight="4" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e2_3" vertex1="2" vertex2="3" text="6" weight="6" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e7_6" vertex1="7" vertex2="6" text="4" weight="4" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e3_6" vertex1="3" vertex2="6" text="3" weight="3" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e6_3" vertex1="6" vertex2="3" text="3" weight="3" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e2_1" vertex1="2" vertex2="1" text="4" weight="4" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e1_7" vertex1="1" vertex2="7" text="6" weight="6" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e6_5" vertex1="6" vertex2="5" text="3" weight="3" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e4_5" vertex1="4" vertex2="5" text="5" weight="5" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e4_3" vertex1="4" vertex2="3" text="5" weight="5" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e2_4" vertex1="2" vertex2="4" text="4" weight="4" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e2_7" vertex1="2" vertex2="7" text="5" weight="5" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e6_4" vertex1="6" vertex2="4" text="4" weight="4" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e4_6" vertex1="4" vertex2="6" text="4" weight="4" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e5_4" vertex1="5" vertex2="4" text="4" weight="4" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e6_7" vertex1="6" vertex2="7" text="4" weight="4" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e7_3" vertex1="7" vertex2="3" text="2" weight="2" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e3_1" vertex1="3" vertex2="1" text="6" weight="6" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e6_1" vertex1="6" vertex2="1" text="6" weight="6" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e4_2" vertex1="4" vertex2="2" text="5" weight="5" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e7_5" vertex1="7" vertex2="5" text="6" weight="6" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e4_1" vertex1="4" vertex2="1" text="3" weight="3" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e3_7" vertex1="3" vertex2="7" text="2" weight="2" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e7_1" vertex1="7" vertex2="1" text="5" weight="5" isDirect="true" model_type="0" model_curvedValue="1" />
+  </graph> 
+</graphml>

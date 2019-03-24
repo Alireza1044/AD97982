@@ -1,0 +1,55 @@
+/* You can visualize the graph with: 
+https://dreampuf.github.io/GraphvizOnline/  Set Engine to fdp
+https://graphviz.herokuapp.com/ 
+http://www.webgraphviz.com/ 
+
+Also if the graph layout doesn't look good try
+changing the splines setting below to:
+ortho, curved, line, polyline, spline */
+
+digraph G {
+   graph[splines = "curved"];
+   node[height = 0.1, width = 0.1];
+   "1" [pos="1,3!"];
+   "2" [pos="-2,-4!"];
+   "3" [pos="1,1!"];
+   "4" [pos="-1,4!"];
+   "5" [pos="-4,1!"];
+   "6" [pos="2,4!"];
+   "7" [pos="2,0!"];
+   "8" [pos="3,-2!"];
+   "9" [pos="-4,-3!"];
+   "1" -> "3" [label="3", color="#008080", fontcolor="#008080"];
+   "8" -> "1" [label="7", color="#000075", fontcolor="#000075"];
+   "2" -> "3" [label="6", color="#000075", fontcolor="#000075"];
+   "9" -> "7" [label="8", color="#008080", fontcolor="#008080"];
+   "6" -> "4" [label="4", color="#46f0f0", fontcolor="#46f0f0"];
+   "3" -> "8" [label="4", color="#fabebe", fontcolor="#fabebe"];
+   "3" -> "4" [label="4", color="#911eb4", fontcolor="#911eb4"];
+   "8" -> "5" [label="9", color="#3cb44b", fontcolor="#3cb44b"];
+   "4" -> "3" [label="4", color="#e6beff", fontcolor="#e6beff"];
+   "4" -> "7" [label="7", color="#808000", fontcolor="#808000"];
+   "1" -> "6" [label="2", color="#800000", fontcolor="#800000"];
+   "5" -> "7" [label="7", color="#ffe119", fontcolor="#ffe119"];
+   "8" -> "3" [label="5", color="#000000", fontcolor="#000000"];
+   "4" -> "6" [label="4", color="#aaffc3", fontcolor="#aaffc3"];
+   "4" -> "8" [label="9", color="#ffd8b1", fontcolor="#ffd8b1"];
+   "2" -> "4" [label="10", color="#808080", fontcolor="#808080"];
+   "8" -> "2" [label="6", color="#808080", fontcolor="#808080"];
+   "6" -> "3" [label="4", color="#911eb4", fontcolor="#911eb4"];
+   "2" -> "5" [label="7", color="#000000", fontcolor="#000000"];
+   "3" -> "6" [label="4", color="#f032e6", fontcolor="#f032e6"];
+   "6" -> "1" [label="2", color="#4363d8", fontcolor="#4363d8"];
+   "9" -> "5" [label="5", color="#bcf60c", fontcolor="#bcf60c"];
+   "2" -> "8" [label="7", color="#ffe119", fontcolor="#ffe119"];
+   "1" -> "8" [label="7", color="#808000", fontcolor="#808000"];
+   "6" -> "8" [label="7", color="#008080", fontcolor="#008080"];
+   "2" -> "9" [label="3", color="#4363d8", fontcolor="#4363d8"];
+   "3" -> "1" [label="3", color="#ffe119", fontcolor="#ffe119"];
+   "7" -> "6" [label="6", color="#808000", fontcolor="#808000"];
+   "8" -> "7" [label="3", color="#4363d8", fontcolor="#4363d8"];
+   "5" -> "4" [label="6", color="#000000", fontcolor="#000000"];
+   "9" -> "4" [label="9", color="#f032e6", fontcolor="#f032e6"];
+   "4" -> "5" [label="6", color="#800000", fontcolor="#800000"];
+   "2" -> "1" [label="9", color="#808000", fontcolor="#808000"];
+}

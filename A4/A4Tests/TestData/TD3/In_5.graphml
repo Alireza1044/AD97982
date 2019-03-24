@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Use http://graphonline.ru/en/ for visualization --><graphml xmlns="http://graphml.graphdrawing.org/xmlns"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+  <graph id="G" edgedefault="directed">
+    <node id="1" positionX="1000" positionY="0" mainText="1" upText="" />
+    <node id="2" positionX="1000" positionY="500" mainText="2" upText="" />
+    <node id="3" positionX="1000" positionY="1000" mainText="3" upText="" />
+    <node id="4" positionX="0" positionY="250" mainText="4" upText="" />
+    <node id="5" positionX="1000" positionY="250" mainText="5" upText="" />
+    <edge id="e2_1" vertex1="2" vertex2="1" text="3" weight="3" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e1_4" vertex1="1" vertex2="4" text="2" weight="2" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e3_2" vertex1="3" vertex2="2" text="3" weight="3" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e2_5" vertex1="2" vertex2="5" text="2" weight="2" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e1_5" vertex1="1" vertex2="5" text="2" weight="2" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e4_5" vertex1="4" vertex2="5" text="2" weight="2" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e4_3" vertex1="4" vertex2="3" text="5" weight="5" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e4_1" vertex1="4" vertex2="1" text="2" weight="2" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e3_1" vertex1="3" vertex2="1" text="6" weight="6" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e5_1" vertex1="5" vertex2="1" text="2" weight="2" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e3_5" vertex1="3" vertex2="5" text="4" weight="4" isDirect="true" model_type="0" model_curvedValue="1" />
+    <edge id="e5_4" vertex1="5" vertex2="4" text="2" weight="2" isDirect="true" model_type="0" model_curvedValue="1" />
+  </graph> 
+</graphml>

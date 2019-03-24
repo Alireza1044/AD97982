@@ -1,0 +1,30 @@
+/* You can visualize the graph with: 
+https://dreampuf.github.io/GraphvizOnline/  Set Engine to fdp
+https://graphviz.herokuapp.com/ 
+http://www.webgraphviz.com/ 
+
+Also if the graph layout doesn't look good try
+changing the splines setting below to:
+ortho, curved, line, polyline, spline */
+
+digraph G {
+   graph[splines = "curved"];
+   node[height = 0.1, width = 0.1];
+   "1" [pos="2,2!"];
+   "2" [pos="2,0!"];
+   "3" [pos="2,-2!"];
+   "4" [pos="1,1!"];
+   "5" [pos="2,1!"];
+   "2" -> "1" [label="3", color="#808000", fontcolor="#808000"];
+   "1" -> "4" [label="2", color="#e6beff", fontcolor="#e6beff"];
+   "3" -> "2" [label="3", color="#4363d8", fontcolor="#4363d8"];
+   "2" -> "5" [label="2", color="#000000", fontcolor="#000000"];
+   "1" -> "5" [label="2", color="#9a6324", fontcolor="#9a6324"];
+   "4" -> "5" [label="2", color="#800000", fontcolor="#800000"];
+   "4" -> "3" [label="5", color="#e6beff", fontcolor="#e6beff"];
+   "4" -> "1" [label="2", color="#fabebe", fontcolor="#fabebe"];
+   "3" -> "1" [label="6", color="#ffe119", fontcolor="#ffe119"];
+   "5" -> "1" [label="2", color="#ffd8b1", fontcolor="#ffd8b1"];
+   "3" -> "5" [label="4", color="#46f0f0", fontcolor="#46f0f0"];
+   "5" -> "4" [label="2", color="#000000", fontcolor="#000000"];
+}
