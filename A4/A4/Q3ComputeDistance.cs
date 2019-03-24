@@ -77,15 +77,23 @@ namespace A4
             bool[] closed = new bool[graph.Length];
             int openCount = 0;
             dist[startNode] = 0;
-            graph[startNode].Potential = CalculatePotential(graph, graph[startNode], graph[endNode], dist);
+            for (int i = 1; i < graph.Length; i++)
+            {
+                graph[i].Potential = CalculatePotential(graph, graph[i], graph[endNode], dist);
+            }
             open[(int)startNode] = true;
+            MinHeap heap = new MinHeap(graph.Length - 1);
+            heap.BuildHeap(graph, (int)startNode);
             openCount++;
+            Node temp = new Node();
 
             while (openCount > 0)
             {
-                var temp = FindMinNode(graph, open, dist);
+                temp = graph[heap.ExtractMin()];//extract min
+
                 if (temp.Key == endNode)
                     return dist[temp.Key];
+
                 open[temp.Key] = false;
                 openCount--;
                 closed[temp.Key] = true;
@@ -105,8 +113,17 @@ namespace A4
                         continue;
 
                     dist[temp.Children[i].Key] = tentative_dist;
-                    graph[temp.Children[i].Key].Potential = dist[temp.Children[i].Key] + CalculatePotential(graph, graph[temp.Children[i].Key],
-                        graph[endNode], dist);
+
+                    if (dist[temp.Children[i].Key] +
+                        CalculatePotential(graph, graph[temp.Children[i].Key], graph[endNode], dist)
+                        < graph[temp.Children[i].Key].Potential)
+                    {
+                        graph[temp.Children[i].Key].Potential =
+                            dist[temp.Children[i].Key] +
+                            CalculatePotential(graph, graph[temp.Children[i].Key], graph[endNode], dist);
+
+                        heap.ChangePriority(temp.Children[i].Key, graph[temp.Children[i].Key].Potential);
+                    }
                 }
             }
             return -1;
