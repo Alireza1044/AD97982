@@ -50,6 +50,7 @@
     <Compile Include="Q3GeneralizedMPM.cs" />
     <Compile Include="Q4SuffixTree.cs" />
     <Compile Include="Q5ShortestNonSharedSubstring.cs" />
+    <Compile Include="Trie.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

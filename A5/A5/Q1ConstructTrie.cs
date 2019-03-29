@@ -19,8 +19,9 @@ namespace A5
 
         public string[] Solve(long n, string[] patterns)
         {
-            // write your code here
-            throw new NotImplementedException();
+            var trie = Trie.ConstructTrie(n, patterns);
+            return Trie.Print(trie);
         }
+
     }
 }
