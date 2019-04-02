@@ -1,9 +1,9 @@
-G
-ACTAG$
 $
-A
 CTAG$
 G$
+A
 CTAG$
-TAG$
 $
+ACTAG$
+G
+TAG$

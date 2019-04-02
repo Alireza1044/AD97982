@@ -27,7 +27,6 @@ namespace A5
             {
                 Insert(root, pattern, ref key);
             }
-
             return root;
         }
 

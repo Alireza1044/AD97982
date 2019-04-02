@@ -1,8 +1,8 @@
-A
-TTAG$
-G$
-T
-TAG$
-AG$
-G$
 $
+G$
+TTAG$
+A
+G$
+AG$
+TAG$
+T

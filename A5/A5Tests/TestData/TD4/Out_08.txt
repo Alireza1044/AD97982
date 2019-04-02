@@ -1,11 +1,11 @@
-T
-CCTACT$
-ACT$
 $
-C
+ACT$
 CTACT$
+$
+ACT$
 T
-ACT$
+C
 $
 ACT$
-$
+CCTACT$
+T
