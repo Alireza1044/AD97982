@@ -18,8 +18,8 @@ namespace A5
 
         public long[] Solve(string text, long n, string[] patterns)
         {
-            // write your code here            
-			throw new NotImplementedException();
+            var x = new Q2MultiplePatternMatching("TD3");
+            return x.Solve(text, n, patterns);
         }
     }
 }

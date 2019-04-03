@@ -14,7 +14,6 @@ namespace A5
         public Trie Parent { get; set; }
         public int Position { get; set; }
         public bool IsLeaf { get; set; }
-        public bool InText { get; private set; }
 
         public Trie(int key, char charachter, Trie parent = null)
         {
@@ -23,7 +22,6 @@ namespace A5
             Parent = parent;
             Position = -1;
             IsLeaf = false;
-            InText = false;
             Children = new List<Trie>();
         }
         public static Trie ConstructTrie(long n, string[] patterns)
@@ -93,57 +91,57 @@ namespace A5
             return false;
         }
 
-        internal static long[] FindPatterns(Trie root, string[] patterns)
-        {
-            List<long> result = new List<long>();
-            foreach (var pattern in patterns)
-            {
-                DFS(root,pattern,ref result);
-            }
-            result.Reverse();
-            return result.ToArray();
-        }
+        //internal static long[] FindPatterns(Trie root, string[] patterns)
+        //{
+        //    List<long> result = new List<long>();
+        //    foreach (var pattern in patterns)
+        //    {
+        //        DFS(root,pattern,ref result);
+        //    }
+        //    result.Reverse();
+        //    return result.ToArray();
+        //}
 
-        private static void DFS(Trie root, string pattern, ref List<long> result)
-        {
-            Stack<Trie> stack = new Stack<Trie>();
-            Trie temp = root;
-            stack.Push(temp);
-            int i = 0;
-            bool flag = false;
-            while (stack.Any())
-            {
-                temp = stack.Peek();
-                if (temp.Charachter != '-')
-                {
-                    if (i == pattern.Length - 1 && pattern[i] == temp.Charachter)
-                    {
-                        FindPosition(temp, ref result);
-                        flag = true;
-                        i = 0;
-                        stack.Pop();
-                    }
-                    else if (i < pattern.Length && pattern[i] == temp.Charachter)
-                    {
-                        stack.Pop();
-                        i++;
-                    }
-                    else if (pattern[i] != temp.Charachter)
-                    {
-                        i = 0;
-                        stack.Pop();
-                    }
-                }
-                else
-                    stack.Pop();
-                for (int j = 0; j < temp.Children.Count; j++)
-                {
-                    stack.Push(temp.Children[j]);
-                }
-            }
-            if(!flag)
-                result.Add(-1);
-        }
+        //private static void DFS(Trie root, string pattern, ref List<long> result)
+        //{
+        //    Stack<Trie> stack = new Stack<Trie>();
+        //    Trie temp = root;
+        //    stack.Push(temp);
+        //    int i = 0;
+        //    bool flag = false;
+        //    while (stack.Any())
+        //    {
+        //        temp = stack.Peek();
+        //        if (temp.Charachter != '-')
+        //        {
+        //            if (i == pattern.Length - 1 && pattern[i] == temp.Charachter)
+        //            {
+        //                FindPosition(temp, ref result);
+        //                flag = true;
+        //                i = 0;
+        //                stack.Pop();
+        //            }
+        //            else if (i < pattern.Length && pattern[i] == temp.Charachter)
+        //            {
+        //                stack.Pop();
+        //                i++;
+        //            }
+        //            else if (pattern[i] != temp.Charachter)
+        //            {
+        //                i = 0;
+        //                stack.Pop();
+        //            }
+        //        }
+        //        else
+        //            stack.Pop();
+        //        for (int j = 0; j < temp.Children.Count; j++)
+        //        {
+        //            stack.Push(temp.Children[j]);
+        //        }
+        //    }
+        //    if(!flag)
+        //        result.Add(-1);
+        //}
 
         //private static int Contains(Trie root, string pattern)
         //{
@@ -173,18 +171,18 @@ namespace A5
         //    return -1;
         //}
 
-        private static void FindPosition(Trie root, ref List<long> result)
-        {
-            Trie temp = root;
-            while (true)
-            {
-                if (temp.Position != -1)
-                    result.Add(temp.Position);
-                if (!temp.Children.Any())
-                    break;
-                temp = temp.Children.First();
-            }
-        }
+        //private static void FindPosition(Trie root, ref List<long> result)
+        //{
+        //    Trie temp = root;
+        //    while (true)
+        //    {
+        //        if (temp.Position != -1)
+        //            result.Add(temp.Position);
+        //        if (!temp.Children.Any())
+        //            break;
+        //        temp = temp.Children.First();
+        //    }
+        //}
 
         private static void Insert(Trie root, string pattern, ref int key, int position = -1)
         {

@@ -18,7 +18,6 @@ namespace A5
 
         public long[] Solve(string text, long n, string[] patterns)
         {
-            // write your code here
             Trie root = Trie.ConstructTrie(n,patterns);
 			return Trie.Search(root,text,patterns);
         }
