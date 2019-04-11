@@ -19,8 +19,22 @@ namespace A6
         public string Solve(string text)
         {
             // write your code here
-
-            throw new NotImplementedException();
+            List<string> res = new List<string>();
+            var pattern = text.ToCharArray();
+            for (int i = pattern.Length-1; i >= 0; i--)
+            {
+                string suffix = text.Substring(i);
+                string prefix = text.Substring(0, i);
+                string newPattern = suffix + prefix;
+                res.Add(newPattern);
+            }
+            res.Sort();
+            string result = null;
+            for (int i = 0; i < res.Count; i++)
+            {
+                result += res[i][res[i].Length - 1];
+            }
+            return result;
         }
     }
 }
