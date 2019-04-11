@@ -19,8 +19,8 @@ namespace A6.Tests
         {
             Processor[] problems = new Processor[] {
                 //new Q1ConstructBWT("TD1"),
-                new Q2ReconstructStringFromBWT("TD2"),
-                //new Q3MatchingAgainCompressedString("TD3"),
+                //new Q2ReconstructStringFromBWT("TD2"),
+                new Q3MatchingAgainCompressedString("TD3"),
                 //new Q4ConstructSuffixArray("TD4")
             };
 
