@@ -12,16 +12,15 @@ namespace A5.Tests
     [TestClass()]
     public class GradedTests
     {
-        //[TestMethod(), Timeout(5000)]
-        [TestMethod()]
+        [TestMethod(), Timeout(5000)]
         [DeploymentItem("TestData", "A5_TestData")]
         public void SolveTest()
         {
             Processor[] problems = new Processor[] {
-                //new Q1ConstructTrie("TD1"),
-                //new Q2MultiplePatternMatching("TD2"),
-                //new Q3GeneralizedMPM("TD3"),
-                new Q4SuffixTree("TD4"),
+                new Q1ConstructTrie("TD1"),
+                new Q2MultiplePatternMatching("TD2"),
+                new Q3GeneralizedMPM("TD3"),
+                //new Q4SuffixTree("TD4"),
                 //new Q5ShortestNonSharedSubstring("TD5")
             };
 
