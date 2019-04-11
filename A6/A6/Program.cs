@@ -10,6 +10,7 @@ namespace A6
     {
         public static void Main(string[] args)
         {
+
         }
     }
 }
