@@ -1,0 +1,4 @@
+AT$TCTATG
+2
+TCT
+TATG
