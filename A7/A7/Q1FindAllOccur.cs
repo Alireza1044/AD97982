@@ -15,7 +15,7 @@ namespace A7
         }
 
         public override string Process(string inStr) =>
-        TestTools.Process(inStr, (Func<String, String, long[]>)Solve);
+        TestTools.Process(inStr, (Func<String, String, long[]>)Solve,"\n");
 
         public long[] Solve(string text, string pattern)
         {
