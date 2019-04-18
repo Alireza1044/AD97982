@@ -34,11 +34,11 @@ namespace A7
             long[] newCls = new long[n];
             newCls[newOrder[0]] = 0;
 
-            for (int i = 1; i < n - 1; i++)
+            for (int i = 1; i < n; i++)
             {
                 var current = newOrder[i];
                 var previous = newOrder[i - 1];
-                var middle = current + l;
+                var middle = (current + l) % n;
                 var middlePrev = (previous + l) % n;
                 if (cls[current] != cls[previous] || cls[middle] != cls[middlePrev])
                     newCls[current] = newCls[previous] + 1;
@@ -60,10 +60,10 @@ namespace A7
 
             for (int i = 1; i < text.Length; i++)
             {
-                count[i] += count[i] + count[i - 1];
+                count[i] = count[i] + count[i - 1];
             }
 
-            for (int i = text.Length-1; i >= 0; i--)
+            for (int i = text.Length - 1; i >= 0; i--)
             {
                 var start = (order[i] - l + text.Length) % text.Length;
                 var cl = cls[start];
