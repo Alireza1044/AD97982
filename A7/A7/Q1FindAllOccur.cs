@@ -11,11 +11,11 @@ namespace A7
     {
         public Q1FindAllOccur(string testDataName) : base(testDataName)
         {
-			this.VerifyResultWithoutOrder = true;
+            this.VerifyResultWithoutOrder = true;
         }
 
         public override string Process(string inStr) =>
-        TestTools.Process(inStr, (Func<String, String, long[]>)Solve,"\n");
+        TestTools.Process(inStr, (Func<String, String, long[]>)Solve, "\n");
 
         public long[] Solve(string text, string pattern)
         {
@@ -42,7 +42,7 @@ namespace A7
                     }
                     else
                     {
-                        if(pivot > 0)
+                        if (pivot > 0)
                             pivot = borders[pivot - 1];
                     }
                     if (pivot == 0 && textFinder[i] != textFinder[pivot])

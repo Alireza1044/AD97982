@@ -14,13 +14,13 @@ namespace A7
             long[] cls = new long[text.Length];
 
             order = SortCharachters(text);
-            cls = ComputeCharClasses(text,order);
+            cls = ComputeCharClasses(text, order);
 
             int l = 1;
 
-            while(l < text.Length)
+            while (l < text.Length)
             {
-                order = SortDoubled(text,l,order,cls);
+                order = SortDoubled(text, l, order, cls);
                 cls = UpdateClasses(order, cls, l);
                 l *= 2;
             }
@@ -116,7 +116,7 @@ namespace A7
             {
                 count[i] = count[i] + count[i - 1];
             }
-            for (int i = text.Length - 1; i >= 0; i--) 
+            for (int i = text.Length - 1; i >= 0; i--)
             {
                 switch (text[i])
                 {
