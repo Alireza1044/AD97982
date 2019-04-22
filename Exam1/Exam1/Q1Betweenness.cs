@@ -11,7 +11,7 @@ namespace Exam1
     {
         public Q1Betweenness(string testDataName) : base(testDataName)
         {
-            //this.ExcludeTestCaseRangeInclusive(2, 50);
+            this.ExcludeTestCaseRangeInclusive(15, 50);
         }
 
         public override string Process(string inStr) =>
@@ -20,7 +20,15 @@ namespace Exam1
 
         public long[] Solve(long NodeCount, long[][] edges)
         {
-            return new long[] { };
+            //edges = edges.OrderByDescending(x => x).ToArray();
+            List<long> result = new List<long>();
+            Node[] graph = Node.BuildGraph(NodeCount, edges);
+            Node.FindShortestPaths(graph);
+            for (int i = 1; i < graph.Length; i++)
+            {
+                result.Add(graph[i].Betweennes);
+            }
+            return result.ToArray();
         }
     }
 }
