@@ -21,7 +21,7 @@ namespace Exam1
 
         public string Solve(string cipher)
         {
-            dict = File.ReadAllLines(@"../../../Exam1Tests/TestData/TD2/dictionary.txt");
+            dict = File.ReadAllLines(@"Exam1_TestData\TD2\dictionary.txt");
 
             Dictionary<string, string> dictionary = new Dictionary<string, string>();
             for (int i = 0; i < dict.Length; i++)
