@@ -6,109 +6,74 @@ using System.Threading.Tasks;
 
 namespace A8
 {
-    public struct Edge
+    public static class Graph
     {
-        public int Key { get; set; }
-        public long Capacity { get; set; }
-        public long Flow { get; set; }
-        public Edge(int key,long capacity)
+        internal static long FindMaxFlow(int[,] graph, int[,] residualGraph, long nodeCount)
         {
-            Key = key;
-            Capacity = capacity;
-            Flow = 0;
-        }
-    }
-    public class Graph
-    {
-        public int Key { get; set; }
-        public List<Edge> Children { get; set; }
-        public Graph(int key)
-        {
-            Key = key;
-            Children = new List<Edge>();
-        }
-        internal static Graph[] BuildGraph(long nodeCount, long edgeCount, long[][] edges)
-        {
-            Graph[] graph = new Graph[nodeCount+1];
-            for (int i = 1; i < graph.Length; i++)
-            {
-                graph[i] = new Graph(i);
-            }
-
-            for (int i = 1; i < edges.Length; i++)
-            {
-                graph[edges[i][0]].Children.Add(new Edge((int)edges[i][1], edges[i][2]));
-            }
-
-            return graph;
-        }
-
-        internal static long FindMaxFlow(Graph[] graph, Graph[] rGraph,int source, int sink)
-        {
-            int[] parent = new int[graph.Length];
+            int source = 1;
+            int sink = (int)nodeCount;
+            int[] parent = new int[nodeCount + 1];
             long maxFlow = 0;
 
-            while (BFS(rGraph, parent, source,sink))
+            while (BFS(residualGraph, source, sink, parent, nodeCount))
             {
                 long pathFlow = int.MaxValue;
+                int i = sink;
 
-                for (int i = sink; i != source; i = parent[i])
+                while (i != source && i != 0)
                 {
-                    if (i < 1)
-                        break;
-                    pathFlow = Math.Min(pathFlow, 
-                        rGraph[parent[i]].Children.Find(x => x.Key == i).Capacity);
+                    pathFlow = Math.Min(pathFlow, residualGraph[parent[i], i]);
+                    i = parent[i];
                 }
 
-                for (int i = sink; i != source; i = parent[i])
+                i = sink;
+
+                while (i != source && i != 0)
                 {
-                    if (i < 1)
-                        break;
-                    var temp = rGraph[parent[i]].Children.FindIndex(x => x.Key == i);
-                    rGraph[parent[i]].Children[temp] = new Edge(rGraph[parent[i]].Children[temp].Key
-                        , rGraph[parent[i]].Children[temp].Capacity - pathFlow);
-                    temp = rGraph[i].Children.FindIndex(x => x.Key == parent[i]);
-                    rGraph[i].Children[temp] = new Edge(rGraph[i].Children[temp].Key
-                        , rGraph[i].Children[temp].Capacity + pathFlow);
+                    residualGraph[parent[i], i] -= (int)pathFlow;
+                    residualGraph[i, parent[i]] += (int)pathFlow;
+                    i = parent[i];
                 }
 
                 maxFlow += pathFlow;
+                if (pathFlow == 0) break;
             }
 
             return maxFlow;
         }
 
-        private static bool BFS(Graph[] rGraph, int[] parent, int source, int sink)
+        private static bool BFS(int[,] residualGraph, int source, int sink, int[] parent, long nodeCount)
         {
-            bool[] isChecked = new bool[rGraph.Length];
+            bool[] isVisited = new bool[nodeCount + 1];
 
-            // Create a queue, enqueue source vertex and mark 
-            // source vertex as visited 
             Queue<int> queue = new Queue<int>();
             queue.Enqueue(source);
+            isVisited[source] = true;
             parent[source] = -1;
-            isChecked[source] = true;
-            // Standard BFS Loop 
+
             while (queue.Count != 0)
             {
                 int temp = queue.Dequeue();
-
-                for (int i = 0; i < rGraph[temp].Children.Count; i++)
+                for (int i = 1; i <= nodeCount; i++)
                 {
-                    if (isChecked[rGraph[temp].Children[i].Key] == false 
-                        && rGraph[temp].Children[i].Capacity > 0)
+                    if (isVisited[i] == false && residualGraph[temp, i] > 0)
                     {
-                        queue.Enqueue(rGraph[temp].Children[i].Key);
-                        parent[rGraph[temp].Children[i].Key] = temp;
-                        isChecked[rGraph[temp].Children[i].Key] = true;
+                        queue.Enqueue(i);
+                        parent[i] = temp;
+                        isVisited[i] = true;
                     }
                 }
             }
 
-            // If we reached sink in BFS  
-            // starting from source, then 
-            // return true, else false 
-            return (isChecked[sink] == true);
+            return isVisited[source] == true;
+        }
+
+        internal static void BuildGraph(int[,] graph, long[][] edges)
+        {
+            for (int i = 0; i < edges.Length; i++)
+            {
+                graph[(int)edges[i][0], (int)edges[i][1]] += (int)edges[i][2];
+            }
         }
     }
 }
