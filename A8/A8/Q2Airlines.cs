@@ -28,7 +28,7 @@ namespace A8
             return BipartiteMatch(residualGraph, flightCount, crewCount);
         }
 
-        private long[] BipartiteMatch(int[,] residualGraph, long m, long n)
+        public long[] BipartiteMatch(int[,] residualGraph, long m, long n)
         {
             long[] result = new long[m];
 
@@ -50,7 +50,7 @@ namespace A8
             return result;
         }
 
-        private void BuildNetwork(long n, long m, long[][] info, int[,] graph)
+        public static void BuildNetwork(long n, long m, long[][] info, int[,] graph)
         {
             for (int i = 1; i <= n; i++)
             {
@@ -74,7 +74,7 @@ namespace A8
             }
         }
 
-        internal static void FindMaxFlow(int[,] graph, int[,] residualGraph, long m, long n)
+        public static long FindMaxFlow(int[,] graph, int[,] residualGraph, long m, long n)
         {
             int source = 0;
             int sink = (int)(m + n + 1);
@@ -104,9 +104,10 @@ namespace A8
                 maxFlow += pathFlow;
                 if (pathFlow == 0) break;
             }
+            return maxFlow;
         }
 
-        private static bool BFS(int[,] residualGraph, int source, int sink, int[] parent, long nodeCount)
+        public static bool BFS(int[,] residualGraph, int source, int sink, int[] parent, long nodeCount)
         {
             bool[] isVisited = new bool[nodeCount];
 

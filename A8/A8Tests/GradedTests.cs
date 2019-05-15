@@ -19,16 +19,15 @@ namespace A8.Tests
             RunTest(new Q1Evaquating("TD1"));
         }
 
-        [TestMethod()/*, Timeout(2000)*/]
+        [TestMethod(), Timeout(2000)]
         public void SolveTest_Q2Airlines()
         {
             RunTest(new Q2Airlines("TD2"));
         }
 
-        [TestMethod()/*, Timeout(2000)*/]
+        [TestMethod(), Timeout(2000)]
         public void SolveTest_Q3Stocks()
         {
-            Assert.Inconclusive("A8.Q3 Not Solved");
             RunTest(new Q3Stocks("TD3"));
         }
 
