@@ -12,8 +12,6 @@ namespace TestCommon
         public static readonly char[] IgnoreChars = new char[] { '\n', '\r', ' ' };
         public static readonly char[] NewLineChars = new char[] { '\n', '\r' };
 
-<<<<<<< HEAD
-=======
 
         public static string Process(string inStr, Func<long, double[,], double[]> processor)
         {
@@ -87,7 +85,6 @@ namespace TestCommon
 
 
 
->>>>>>> origin/sauleh/TestCommon.A9
         public static string Process(string inStr, Func<long, long, long[][], long[]> solve)
         {
             var lines = inStr.Split(NewLineChars, StringSplitOptions.RemoveEmptyEntries);
