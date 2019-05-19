@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.SolverFoundation.Solvers;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -11,6 +12,88 @@ namespace TestCommon
     {
         public static readonly char[] IgnoreChars = new char[] { '\n', '\r', ' ' };
         public static readonly char[] NewLineChars = new char[] { '\n', '\r' };
+
+        public static string Process(string inStr, Func<long, long, long[][], long[], string[]> solve)
+        {
+            var lines = inStr.Split(NewLineChars, StringSplitOptions.RemoveEmptyEntries);
+            long eqCount, varCount;
+            ParseTwoNumbers(lines[0], out eqCount, out varCount);
+            var A = ReadTree(lines.Skip(1).Take((int)eqCount));
+            var b = lines.Last().Split(IgnoreChars, StringSplitOptions.RemoveEmptyEntries)
+                .Select(v => long.Parse(v)).ToArray();
+
+            return string.Join("\n", solve(eqCount, varCount, A, b));
+        }
+
+        public static string Process(string inStr, Func<long, double[,], double[]> processor)
+        {
+            long count;
+            var lines = inStr.Split(NewLineChars, StringSplitOptions.RemoveEmptyEntries);
+            count = int.Parse(lines.First());
+            double[,] data = new double[count, count + 1];
+            for (int i = 0; i < count; i++)
+            {
+                String[] line = lines[i + 1].Split(' ');
+                for (int j = 0; j < count + 1; j++)
+                {
+
+                    double.TryParse(line[j], out data[i, j]);
+
+                }
+
+            }
+            return string.Join(" ", processor(count, data));
+        }
+
+        public static string Process(string inStr, Func<int, int, long[,], string[]> processor)
+        {
+            int N, M;
+            var lines = inStr.Split('\n');
+            int.TryParse(lines.First().Split(' ')[0], out M);
+            int.TryParse(lines.First().Split(' ')[1], out N);
+            long[,] data = new long[N, 2];
+            for (int i = 0; i < N; i++)
+            {
+
+                String[] line = lines[i + 1].Split(' ');
+                long.TryParse(line[0], out data[i, 0]);
+                long.TryParse(line[1], out data[i, 1]);
+
+            }
+            return string.Join("\n", processor(M, N, data));
+        }
+
+
+        public static string Process(string inStr, Func<int, int, double[,], String> processor)
+        {
+            int N, M;
+            var lines = inStr.Split('\n');
+            int.TryParse(lines.First().Split(' ')[0], out M);
+            int.TryParse(lines.First().Split(' ')[1], out N);
+            //Console.WriteLine(M + "-" + N);M=c,N=node
+            double[,] data = new double[M + 1, N + 1];
+            //Console.WriteLine(lines.Length);
+            for (int i = 0; i < M; i++)
+            {
+
+                //Console.WriteLine(lines[i + 1]);
+                String[] line = lines[i + 1].Split(' ');
+                for (int j = 0; j < N; j++)
+                {
+
+                    double.TryParse(line[j], out data[i, j]);
+
+                }
+
+            }
+            for (int i = 0; i < M; i++)
+                double.TryParse(lines[M + 1].Split(' ')[i], out data[i, N]);
+
+            for (int j = 0; j < N; j++)
+                double.TryParse(lines[M + 2].Split(' ')[j], out data[M, j]);
+            data[M, N] = 0;
+            return processor(M, N, data);
+        }
 
         public static string Process(string inStr, Func<long, long, long[][], long[]> solve)
         {
@@ -196,6 +279,8 @@ namespace TestCommon
             var expectedLines = File.ReadAllLines(outFile)
                 .Select(line => line.Trim(IgnoreChars)) // Ignore white spaces 
                 .Where(line => !string.IsNullOrWhiteSpace(line)); // Ignore empty lines
+
+            testResult = testResult.Replace("\r\n", "\n");
 
             if (ignoreOrder)
             {
@@ -622,7 +707,7 @@ namespace TestCommon
             return firstLine;
         }
 
-        private static void ParseTwoNumbers(string inStr,
+        public static void ParseTwoNumbers(string inStr,
             out long a, out long b)
         {
             var toks = inStr.Split(IgnoreChars, StringSplitOptions.RemoveEmptyEntries);
@@ -630,5 +715,53 @@ namespace TestCommon
             b = long.Parse(toks[1]);
         }
 
+        public static void SatVerifier(
+            string inFileName,
+            string strResult)
+        {
+            string outFile = inFileName.Replace("In", "Out");
+            string expected = File.ReadAllText(outFile);
+
+            Debug.WriteLine($"Solving {Path.GetFileName(outFile)}");
+
+            var lines = strResult.Split(TestTools.NewLineChars, StringSplitOptions.RemoveEmptyEntries);
+
+            long expCount, varCount;
+            TestTools.ParseTwoNumbers(lines[0], out expCount, out varCount);
+            //Abort after 500ms
+            AbortPolicy abortPolicy = new AbortPolicy(5000);
+            var sat = new SatSolverParams(abortPolicy.TimeOver);
+            List<Literal[]> cnf = lines
+                     .Skip(1)
+                     .Select(e => e.Split(TestTools.IgnoreChars, StringSplitOptions.RemoveEmptyEntries)
+                                   .Select(s => int.Parse(s))
+                                   .Where(v => v != 0)
+                                   .Select(v => new Literal(Math.Abs(v), v > 0))
+                                   .ToArray())
+                     .ToList();
+            var result = SatSolver.Solve(sat, (int)varCount + 1, cnf);
+            bool bSat = result.Any();
+            Debug.WriteLine($"Solution found: {bSat}");
+            var bExpectedSat =
+                expected.Trim(TestTools.IgnoreChars) == "SATISFIABLE";
+            Assert.AreEqual(bExpectedSat, bSat);
+        }
+
     }
+
+    class AbortPolicy
+    {
+        private int msTimeout;
+        private Stopwatch sw;
+        public AbortPolicy(int msTimeout)
+        {
+            this.msTimeout = msTimeout;
+            sw = Stopwatch.StartNew();
+        }
+
+        public bool TimeOver() =>
+            sw.ElapsedMilliseconds > msTimeout;
+    }
+
+
 }
