@@ -16,15 +16,8 @@ namespace A9
 
         public string Solve(int N,int M, double[,] matrix1)
         {
-            for (int i = 0; i < matrix1.GetLength(0); i++)
-            {
-                for (int j = 0; j < matrix1.GetLength(1); j++)
-                {
-                    Console.Write(matrix1[i, j]);
-                }
-                Console.WriteLine();
-            }
-            return "test";
+            Q3OnlineAdAllocation q3 = new Q3OnlineAdAllocation("TD2");
+            return q3.Solve(N, M, matrix1);
         }
     }
 }
