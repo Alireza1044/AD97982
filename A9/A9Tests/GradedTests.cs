@@ -13,20 +13,19 @@ namespace A9.Tests
     [TestClass()]
     public class GradedTests
     {
-        [TestMethod()/*, Timeout(2000)*/]
+        [TestMethod(), Timeout(2000)]
         public void SolveTest_Q1InferEnergyValues()
         {
             RunTest(new Q1InferEnergyValues("TD1"));
         }
 
-        [TestMethod(), Timeout(2000)]
+        [TestMethod()/*, Timeout(2000)*/]
         public void SolveTest_Q2OptimalDiet()
         {
-            //Assert.Inconclusive("A9.Q2 Not Solved");
-            RunTest(new Q3OnlineAdAllocation("TD2"));
+            RunTest(new Q2OptimalDiet("TD2"));
         }
 
-        [TestMethod(), Timeout(2000)]
+        [TestMethod()/*, Timeout(2000)*/]
         public void SolveTest_Q3OnlineAdAllocation()
         {
             //Assert.Inconclusive("A9.Q3 Not Solved");

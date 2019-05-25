@@ -1,1 +1,2 @@
-Infinity
+Bounded Solution
+0

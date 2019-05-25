@@ -16,8 +16,15 @@ namespace A9
 
         public string Solve(int N,int M, double[,] matrix1)
         {
-            return null;
+            for (int i = 0; i < matrix1.GetLength(0); i++)
+            {
+                for (int j = 0; j < matrix1.GetLength(1); j++)
+                {
+                    Console.Write(matrix1[i, j]);
+                }
+                Console.WriteLine();
+            }
+            return "test";
         }
-
     }
 }

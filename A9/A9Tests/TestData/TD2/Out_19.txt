@@ -1,2 +1,2 @@
 Bounded Solution
-100 0 26
+40 0 3.5
