@@ -13,7 +13,6 @@ namespace A9
 
         public Q3OnlineAdAllocation(string testDataName) : base(testDataName)
         {
-            //this.ExcludeTestCaseRangeInclusive(1, 37);
             this.ExcludeTestCases(new int[] { 5, 33, 41 });
         }
 
@@ -24,7 +23,7 @@ namespace A9
         {
             double[,] matrix = BuildMatrix(matrix1, c, v);
             var pivot = FindPivot(matrix);
-            
+
             while (pivot.Item2 != -1)
             {
                 RowFunctions(matrix, pivot);
@@ -70,7 +69,7 @@ namespace A9
                 {
                     temp += matrix1[i, j] * res[j];
                 }
-                temp = Math.Round(temp * 2)/2;
+                temp = Math.Round(temp * 2) / 2;
                 if (temp > matrix1[i, matrix1.GetLength(1) - 1])
                     return "No Solution";
             }
