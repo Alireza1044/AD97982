@@ -1,6 +1,5 @@
-﻿using Microsoft.SolverFoundation.Solvers;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
+﻿using System;
+using Microsoft.SolverFoundation.Solvers;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
