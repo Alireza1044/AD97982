@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.SolverFoundation.Solvers;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -12,6 +13,17 @@ namespace TestCommon
         public static readonly char[] IgnoreChars = new char[] { '\n', '\r', ' ' };
         public static readonly char[] NewLineChars = new char[] { '\n', '\r' };
 
+        public static string Process(string inStr, Func<long, long, long[][], long[], string[]> solve)
+        {
+            var lines = inStr.Split(NewLineChars, StringSplitOptions.RemoveEmptyEntries);
+            long eqCount, varCount;
+            ParseTwoNumbers(lines[0], out eqCount, out varCount);
+            var A = ReadTree(lines.Skip(1).Take((int)eqCount));
+            var b = lines.Last().Split(IgnoreChars, StringSplitOptions.RemoveEmptyEntries)
+                .Select(v => long.Parse(v)).ToArray();
+
+            return string.Join("\n", solve(eqCount, varCount, A, b));
+        }
 
         public static string Process(string inStr, Func<long, double[,], double[]> processor)
         {
@@ -48,7 +60,7 @@ namespace TestCommon
                 long.TryParse(line[1], out data[i, 1]);
 
             }
-            return string.Join("~", processor(M, N, data));
+            return string.Join("\n", processor(M, N, data));
         }
 
 
@@ -82,8 +94,6 @@ namespace TestCommon
             data[M, N] = 0;
             return processor(M, N, data);
         }
-
-
 
         public static string Process(string inStr, Func<long, long, long[][], long[]> solve)
         {
@@ -697,7 +707,7 @@ namespace TestCommon
             return firstLine;
         }
 
-        private static void ParseTwoNumbers(string inStr,
+        public static void ParseTwoNumbers(string inStr,
             out long a, out long b)
         {
             var toks = inStr.Split(IgnoreChars, StringSplitOptions.RemoveEmptyEntries);
@@ -705,5 +715,53 @@ namespace TestCommon
             b = long.Parse(toks[1]);
         }
 
+        public static void SatVerifier(
+            string inFileName,
+            string strResult)
+        {
+            string outFile = inFileName.Replace("In", "Out");
+            string expected = File.ReadAllText(outFile);
+
+            Debug.WriteLine($"Solving {Path.GetFileName(outFile)}");
+
+            var lines = strResult.Split(TestTools.NewLineChars, StringSplitOptions.RemoveEmptyEntries);
+
+            long expCount, varCount;
+            TestTools.ParseTwoNumbers(lines[0], out expCount, out varCount);
+            //Abort after 500ms
+            AbortPolicy abortPolicy = new AbortPolicy(5000);
+            var sat = new SatSolverParams(abortPolicy.TimeOver);
+            List<Literal[]> cnf = lines
+                     .Skip(1)
+                     .Select(e => e.Split(TestTools.IgnoreChars, StringSplitOptions.RemoveEmptyEntries)
+                                   .Select(s => int.Parse(s))
+                                   .Where(v => v != 0)
+                                   .Select(v => new Literal(Math.Abs(v), v > 0))
+                                   .ToArray())
+                     .ToList();
+            var result = SatSolver.Solve(sat, (int)varCount + 1, cnf);
+            bool bSat = result.Any();
+            Debug.WriteLine($"Solution found: {bSat}");
+            var bExpectedSat =
+                expected.Trim(TestTools.IgnoreChars) == "SATISFIABLE";
+            Assert.AreEqual(bExpectedSat, bSat);
+        }
+
     }
+
+    class AbortPolicy
+    {
+        private int msTimeout;
+        private Stopwatch sw;
+        public AbortPolicy(int msTimeout)
+        {
+            this.msTimeout = msTimeout;
+            sw = Stopwatch.StartNew();
+        }
+
+        public bool TimeOver() =>
+            sw.ElapsedMilliseconds > msTimeout;
+    }
+
+
 }
