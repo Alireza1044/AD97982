@@ -17,7 +17,35 @@ namespace A3
 
         public string[] Solve(int V, int E, long[,] matrix)
         {
-            throw new NotImplementedException();
+            string[] result = new string[4 * V + 3 * E + 1];
+            int clauseCount = 4 * V + 3 * E;
+            int variableCount = V * 3;
+            result[0] = clauseCount.ToString() + " " + variableCount.ToString();
+
+            // first V clauses
+            // 3 variable clauses
+            for (int i = 1; i <= V; i++)
+            {
+                result[i] = (3 * i - 2).ToString() + " " + (3 * i - 1).ToString() + " " + (3 * i).ToString() + " 0";
+            }
+
+            //V -> 4V clauses
+            //
+            for (int i = V + 1; i <= 4 * V; i += 3)
+            {
+                result[i] = "-" + (i - V).ToString() + " -" + (i - V + 1).ToString() + " 0";
+                result[i + 1] = "-" + (i - V).ToString() + " -" + (i - V + 2).ToString() + " 0";
+                result[i + 2] = "-" + (i - V + 1).ToString() + " -" + (i - V + 2).ToString() + " 0";
+            }
+
+            for (int i = 4 * V + 1, j = 0; i < result.Length; i+=3, j++)
+            {
+                result[i] = "-" + (3*matrix[j, 0] -2).ToString() + " -" + (3*matrix[j, 1]-2).ToString() + " 0";
+                result[i+1] = "-" + (3*matrix[j, 0] - 1).ToString() + " -" + (3*matrix[j, 1] - 1).ToString() + " 0"; ;
+                result[i + 2] = "-" + (3*matrix[j, 0] ).ToString() + " -" + (3*matrix[j, 1] ).ToString() + " 0"; 
+            }
+
+            return result;
         }
 
         public override Action<string, string> Verifier { get; set; } =
