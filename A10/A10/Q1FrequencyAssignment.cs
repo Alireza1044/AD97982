@@ -26,23 +26,23 @@ namespace A3
             // 3 variable clauses
             for (int i = 1; i <= V; i++)
             {
-                result[i] = (3 * i - 2).ToString() + " " + (3 * i - 1).ToString() + " " + (3 * i).ToString() + " 0";
+                result[i] = $"{(3 * i - 2).ToString()} {(3 * i - 1).ToString()} {(3 * i).ToString()} 0";
             }
 
-            //V -> 4V clauses
-            //
+            // checking that just 1 variable in true for each node
             for (int i = V + 1; i <= 4 * V; i += 3)
             {
-                result[i] = "-" + (i - V).ToString() + " -" + (i - V + 1).ToString() + " 0";
-                result[i + 1] = "-" + (i - V).ToString() + " -" + (i - V + 2).ToString() + " 0";
-                result[i + 2] = "-" + (i - V + 1).ToString() + " -" + (i - V + 2).ToString() + " 0";
+                result[i] = $"-{(i - V).ToString()} -{(i - V + 1).ToString()} 0";
+                result[i + 1] = $"-{(i - V).ToString()}  -{(i - V + 2).ToString()} 0";
+                result[i + 2] = $"-{(i - V + 1).ToString()} -{(i - V + 2).ToString()} 0";
             }
 
-            for (int i = 4 * V + 1, j = 0; i < result.Length; i+=3, j++)
+            // checking that neighbor nodes have different colors
+            for (int i = 4 * V + 1, j = 0; i < result.Length; i += 3, j++)
             {
-                result[i] = "-" + (3*matrix[j, 0] -2).ToString() + " -" + (3*matrix[j, 1]-2).ToString() + " 0";
-                result[i+1] = "-" + (3*matrix[j, 0] - 1).ToString() + " -" + (3*matrix[j, 1] - 1).ToString() + " 0"; ;
-                result[i + 2] = "-" + (3*matrix[j, 0] ).ToString() + " -" + (3*matrix[j, 1] ).ToString() + " 0"; 
+                result[i] = $"-{(3 * matrix[j, 0] - 2).ToString()} -{(3 * matrix[j, 1] - 2).ToString()} 0";
+                result[i + 1] = $"-{(3 * matrix[j, 0] - 1).ToString()} -{(3 * matrix[j, 1] - 1).ToString()} 0"; ;
+                result[i + 2] = $"-{(3 * matrix[j, 0]).ToString()} -{(3 * matrix[j, 1]).ToString()} 0";
             }
 
             return result;
