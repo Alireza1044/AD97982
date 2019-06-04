@@ -25,17 +25,17 @@ namespace A3
 
             string temp = "";
 
-            //// 1v2v3v...vV satri
-            //for (int i = 0; i < V; i++)
-            //{
-            //    temp = "";
-            //    for (int j = 0; j < V; j++)
-            //    {
-            //        temp += $"{i * V + j + 1} ";
-            //    }
-            //    temp += "0";
-            //    result.Add(temp);
-            //}
+            // 1v2v3v...vV satri
+            for (int i = 0; i < V; i++)
+            {
+                temp = "";
+                for (int j = 0; j < V; j++)
+                {
+                    temp += $"{i * V + j + 1} ";
+                }
+                temp += "0";
+                result.Add(temp);
+            }
 
             // satri 2 taii
             for (int i = 0; i < V; i++)
@@ -50,34 +50,17 @@ namespace A3
                 }
             }
 
-            //// -1v-2v-3v...v-V satri
-            //for (int i = 0; i < V; i++)
-            //{
-            //    for (int j = 0; j < V; j++)
-            //    {
-            //        temp = "";
-            //        for (int k = 0; k < V; k++)
-            //        {
-            //            if (k == j)
-            //                continue;
-            //            temp += $"-{i * V + k + 1} ";
-            //        }
-            //        temp += "0";
-            //        result.Add(temp);
-            //    }
-            //}
-
-            //// sotooni
-            //for (int i = 0; i < V; i++)
-            //{
-            //    temp = "";
-            //    for (int j = 0; j < V; j++)
-            //    {
-            //        temp += $"{j * V + 1 + i} ";
-            //    }
-            //    temp += "0";
-            //    result.Add(temp);
-            //}
+            // sotooni
+            for (int i = 0; i < V; i++)
+            {
+                temp = "";
+                for (int j = 0; j < V; j++)
+                {
+                    temp += $"{j * V + 1 + i} ";
+                }
+                temp += "0";
+                result.Add(temp);
+            }
 
             // sotooni 2 taii
             for (int i = 0; i < V; i++)
@@ -92,24 +75,7 @@ namespace A3
                 }
             }
 
-            //// sotooni
-            //for (int i = 0; i < V; i++)
-            //{
-            //    for (int j = 0; j < V; j++)
-            //    {
-            //        temp = "";
-            //        for (int k = 0; k < V; k++)
-            //        {
-            //            if (k == j)
-            //                continue;
-            //            temp += $"-{k * V + i + 1} ";
-            //        }
-            //        temp += "0";
-            //        result.Add(temp);
-            //    }
-            //}
-
-            //build reverse adjacency graph
+            // build reverse adjacency graph
             int[,] revAdjMatrix = new int[V + 1, V + 1];
             for (int i = 1; i <= V; i++)
             {

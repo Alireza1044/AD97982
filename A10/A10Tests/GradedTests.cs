@@ -19,7 +19,7 @@ namespace A3.Tests
             RunTest(new Q1FrequencyAssignment("TD1"));
         }
 
-        [TestMethod()/*, Timeout(5000)*/]
+        [TestMethod(), Timeout(5000)]
         public void SolveTest_Q2CleaningApartment()
         {
             RunTest(new Q2CleaningApartment("TD2"));
