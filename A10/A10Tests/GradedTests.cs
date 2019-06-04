@@ -25,7 +25,7 @@ namespace A3.Tests
             RunTest(new Q2CleaningApartment("TD2"));
         }
 
-        [TestMethod()/*, Timeout(1000)*/]
+        [TestMethod(), Timeout(1000)]
         public void SolveTest_Q3AdBudgetAllocation()
         {
             RunTest(new Q3AdBudgetAllocation("TD3"));

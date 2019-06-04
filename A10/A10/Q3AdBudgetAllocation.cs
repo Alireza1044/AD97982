@@ -10,11 +10,7 @@ namespace A3
     public class Q3AdBudgetAllocation : Processor
     {
         public Q3AdBudgetAllocation(string testDataName)
-            : base(testDataName)
-        {
-            this.ExcludeTestCaseRangeInclusive(37, 45);
-            //this.ExcludeTestCaseRangeInclusive(1, 36);
-        }
+            : base(testDataName) { }
 
         public override string Process(string inStr) =>
             TestTools.Process(inStr, (Func<long, long, long[][], long[], string[]>)Solve);
@@ -28,302 +24,296 @@ namespace A3
 
             for (int i = 0; i < A.Length; i++)
             {
-                // add non-zero variables
-                //constraint.Clear();
 
-                //for (int j = 0; j < A[i].Length; j++)
-                //{
-                //    if (A[i][j] != 0)
-                //    {
-                //        constraint.Add(A[i][j]);
-                //    }
-                //}
 
                 string temp = "";
 
                 // check in the inequality
                 // 3 variable
-                if (varCount >= 3)
+                for (int j = 0; j < varCount; j++)
                 {
-                    for (int j = 0; j < varCount; j++)
+                    if (A[i][j] == 0)
+                        continue;
+                    for (int k = j + 1; k < varCount; k++)
                     {
-                        for (int k = j + 1; k < varCount; k++)
+                        if (A[i][k] == 0)
+                            continue;
+                        for (int z = k + 1; z < varCount; z++)
                         {
-                            for (int z = k + 1; z < varCount; z++)
+                            if (A[i][z] == 0)
+                                continue;
+                            temp = "";
+                            // 1 1 1
+                            if (A[i][j] * 1 + A[i][k] * 1 + A[i][z] * 1 > b[i])
                             {
-                                temp = "";
-                                // 1 1 1
-                                if (A[i][j] * 1 + A[i][k] * 1 + A[i][z] * 1 > b[i])
+                                if (A[i][j] != 0)
+                                    temp += $"{j + 1} ";
+
+                                if (A[i][k] != 0)
+                                    temp += $"{k + 1} ";
+
+                                if (A[i][z] != 0)
+                                    temp += $"{z + 1} ";
+
+                                if (temp != "")
                                 {
-                                    if (A[i][j] != 0)
-                                        temp += $"{j + 1} ";
-
-                                    if (A[i][k] != 0)
-                                        temp += $"{k + 1} ";
-
-                                    if (A[i][z] != 0)
-                                        temp += $"{z + 1} ";
-
-                                    if (temp != "")
-                                    {
-                                        temp += "0";
-                                        result.Add(temp);
-                                    }
+                                    temp += "0";
+                                    result.Add(temp);
                                 }
+                            }
 
-                                temp = "";
-                                // 1 1 0
-                                if (A[i][j] * 1 + A[i][k] * 1 + A[i][z] * 0 > b[i])
+                            temp = "";
+                            // 1 1 0
+                            if (A[i][j] * 1 + A[i][k] * 1 + A[i][z] * 0 > b[i])
+                            {
+                                if (A[i][j] != 0)
+                                    temp += $"{j + 1} ";
+
+                                if (A[i][k] != 0)
+                                    temp += $"{k + 1} ";
+
+                                if (A[i][z] != 0)
+                                    temp += $"-{z + 1} ";
+
+                                if (temp != "")
                                 {
-                                    if (A[i][j] != 0)
-                                        temp += $"{j + 1} ";
-
-                                    if (A[i][k] != 0)
-                                        temp += $"{k + 1} ";
-
-                                    if (A[i][z] != 0)
-                                        temp += $"-{z + 1} ";
-
-                                    if (temp != "")
-                                    {
-                                        temp += "0";
-                                        result.Add(temp);
-                                    }
+                                    temp += "0";
+                                    result.Add(temp);
                                 }
+                            }
 
-                                temp = "";
-                                // 1 0 1
-                                if (A[i][j] * 1 + A[i][k] * 0 + A[i][z] * 1 > b[i])
+                            temp = "";
+                            // 1 0 1
+                            if (A[i][j] * 1 + A[i][k] * 0 + A[i][z] * 1 > b[i])
+                            {
+                                if (A[i][j] != 0)
+                                    temp += $"{j + 1} ";
+
+                                if (A[i][k] != 0)
+                                    temp += $"-{k + 1} ";
+
+                                if (A[i][z] != 0)
+                                    temp += $"{z + 1} ";
+
+                                if (temp != "")
                                 {
-                                    if (A[i][j] != 0)
-                                        temp += $"{j + 1} ";
-
-                                    if (A[i][k] != 0)
-                                        temp += $"-{k + 1} ";
-
-                                    if (A[i][z] != 0)
-                                        temp += $"{z + 1} ";
-
-                                    if (temp != "")
-                                    {
-                                        temp += "0";
-                                        result.Add(temp);
-                                    }
+                                    temp += "0";
+                                    result.Add(temp);
                                 }
+                            }
 
-                                temp = "";
-                                // 1 0 0
-                                if (A[i][j] * 1 + A[i][k] * 0 + A[i][z] * 0 > b[i])
+                            temp = "";
+                            // 1 0 0
+                            if (A[i][j] * 1 + A[i][k] * 0 + A[i][z] * 0 > b[i])
+                            {
+                                if (A[i][j] != 0)
+                                    temp += $"{j + 1} ";
+
+                                if (A[i][k] != 0)
+                                    temp += $"-{k + 1} ";
+
+                                if (A[i][z] != 0)
+                                    temp += $"-{z + 1} ";
+
+                                if (temp != "")
                                 {
-                                    if (A[i][j] != 0)
-                                        temp += $"{j + 1} ";
-
-                                    if (A[i][k] != 0)
-                                        temp += $"-{k + 1} ";
-
-                                    if (A[i][z] != 0)
-                                        temp += $"-{z + 1} ";
-
-                                    if (temp != "")
-                                    {
-                                        temp += "0";
-                                        result.Add(temp);
-                                    }
+                                    temp += "0";
+                                    result.Add(temp);
                                 }
+                            }
 
-                                temp = "";
-                                // 0 1 1
-                                if (A[i][j] * 0 + A[i][k] * 1 + A[i][z] * 1 > b[i])
+                            temp = "";
+                            // 0 1 1
+                            if (A[i][j] * 0 + A[i][k] * 1 + A[i][z] * 1 > b[i])
+                            {
+                                if (A[i][j] != 0)
+                                    temp += $"-{j + 1} ";
+
+                                if (A[i][k] != 0)
+                                    temp += $"{k + 1} ";
+
+                                if (A[i][z] != 0)
+                                    temp += $"{z + 1} ";
+
+                                if (temp != "")
                                 {
-                                    if (A[i][j] != 0)
-                                        temp += $"-{j + 1} ";
-
-                                    if (A[i][k] != 0)
-                                        temp += $"{k + 1} ";
-
-                                    if (A[i][z] != 0)
-                                        temp += $"{z + 1} ";
-
-                                    if (temp != "")
-                                    {
-                                        temp += "0";
-                                        result.Add(temp);
-                                    }
+                                    temp += "0";
+                                    result.Add(temp);
                                 }
+                            }
 
-                                temp = "";
-                                // 0 1 0
-                                if (A[i][j] * 0 + A[i][k] * 1 + A[i][z] * 0 > b[i])
+                            temp = "";
+                            // 0 1 0
+                            if (A[i][j] * 0 + A[i][k] * 1 + A[i][z] * 0 > b[i])
+                            {
+                                if (A[i][j] != 0)
+                                    temp += $"-{j + 1} ";
+
+                                if (A[i][k] != 0)
+                                    temp += $"{k + 1} ";
+
+                                if (A[i][z] != 0)
+                                    temp += $"-{z + 1} ";
+
+                                if (temp != "")
                                 {
-                                    if (A[i][j] != 0)
-                                        temp += $"-{j + 1} ";
-
-                                    if (A[i][k] != 0)
-                                        temp += $"{k + 1} ";
-
-                                    if (A[i][z] != 0)
-                                        temp += $"-{z + 1} ";
-
-                                    if (temp != "")
-                                    {
-                                        temp += "0";
-                                        result.Add(temp);
-                                    }
+                                    temp += "0";
+                                    result.Add(temp);
                                 }
+                            }
 
-                                temp = "";
-                                // 0 0 1
-                                if (A[i][j] * 0 + A[i][k] * 0 + A[i][z] * 1 > b[i])
+                            temp = "";
+                            // 0 0 1
+                            if (A[i][j] * 0 + A[i][k] * 0 + A[i][z] * 1 > b[i])
+                            {
+                                if (A[i][j] != 0)
+                                    temp += $"-{j + 1} ";
+
+                                if (A[i][k] != 0)
+                                    temp += $"-{k + 1} ";
+
+                                if (A[i][z] != 0)
+                                    temp += $"{z + 1} ";
+
+                                if (temp != "")
                                 {
-                                    if (A[i][j] != 0)
-                                        temp += $"-{j + 1} ";
-
-                                    if (A[i][k] != 0)
-                                        temp += $"-{k + 1} ";
-
-                                    if (A[i][z] != 0)
-                                        temp += $"{z + 1} ";
-
-                                    if (temp != "")
-                                    {
-                                        temp += "0";
-                                        result.Add(temp);
-                                    }
+                                    temp += "0";
+                                    result.Add(temp);
                                 }
+                            }
 
-                                temp = "";
-                                // 0 0 0
-                                if (A[i][j] * 0 + A[i][k] * 0 + A[i][z] * 0 > b[i])
+                            temp = "";
+                            // 0 0 0
+                            if (A[i][j] * 0 + A[i][k] * 0 + A[i][z] * 0 > b[i])
+                            {
+                                if (A[i][j] != 0)
+                                    temp += $"-{j + 1} ";
+
+                                if (A[i][k] != 0)
+                                    temp += $"-{k + 1} ";
+
+                                if (A[i][z] != 0)
+                                    temp += $"-{z + 1} ";
+
+                                if (temp != "")
                                 {
-                                    if (A[i][j] != 0)
-                                        temp += $"-{j + 1} ";
-
-                                    if (A[i][k] != 0)
-                                        temp += $"-{k + 1} ";
-
-                                    if (A[i][z] != 0)
-                                        temp += $"-{z + 1} ";
-
-                                    if (temp != "")
-                                    {
-                                        temp += "0";
-                                        result.Add(temp);
-                                    }
+                                    temp += "0";
+                                    result.Add(temp);
                                 }
                             }
                         }
                     }
                 }
-                
+
                 // 2 variable
-                else if(varCount == 2)
+                for (int j = 0; j < varCount; j++)
                 {
-                    for (int j = 0; j < varCount; j++)
+                    if (A[i][j] == 0)
+                        continue;
+                    for (int k = j + 1; k < varCount; k++)
                     {
-                        for (int k = j+1; k < varCount; k++)
-                        {
-                            temp = "";
-                            // 1 1
-                            if(A[i][j] * 1 + A[i][k] * 1 > b[i])
-                            {
-                                if (A[i][j] != 0)
-                                    temp += $"{j + 1} ";
-
-                                if (A[i][k] != 0)
-                                    temp += $"{k + 1} ";
-
-                                if(temp != "")
-                                {
-                                    temp += "0";
-                                    result.Add(temp);
-                                }
-                            }
-
-                            temp = "";
-                            // 1 0
-                            if (A[i][j] * 1 + A[i][k] * 0 > b[i])
-                            {
-                                if (A[i][j] != 0)
-                                    temp += $"{j + 1} ";
-
-                                if (A[i][k] != 0)
-                                    temp += $"-{k + 1} ";
-
-                                if (temp != "")
-                                {
-                                    temp += "0";
-                                    result.Add(temp);
-                                }
-                            }
-
-                            temp = "";
-                            // 0 1
-                            if (A[i][j] * 0 + A[i][k] * 1 > b[i])
-                            {
-                                if (A[i][j] != 0)
-                                    temp += $"-{j + 1} ";
-
-                                if (A[i][k] != 0)
-                                    temp += $"{k + 1} ";
-
-                                if (temp != "")
-                                {
-                                    temp += "0";
-                                    result.Add(temp);
-                                }
-                            }
-
-                            temp = "";
-                            // 0 0
-                            if (A[i][j] * 0 + A[i][k] * 0 > b[i])
-                            {
-                                if (A[i][j] != 0)
-                                    temp += $"-{j + 1} ";
-
-                                if (A[i][k] != 0)
-                                    temp += $"-{k + 1} ";
-
-                                if (temp != "")
-                                {
-                                    temp += "0";
-                                    result.Add(temp);
-                                }
-                            }
-                        }
-                    }
-                }
-
-                // 1 variable
-                else if(varCount == 1)
-                {
-                    for (int j = 0; j < varCount; j++)
-                    {
+                        if (A[i][k] == 0)
+                            continue;
                         temp = "";
-                        // 1
-                        if(A[i][j] * 1 > b[i])
+                        // 1 1
+                        if (A[i][j] * 1 + A[i][k] * 1 > b[i])
                         {
                             if (A[i][j] != 0)
                                 temp += $"{j + 1} ";
 
-                            if(temp != "")
-                            {
-                                temp += "0";
-                                result.Add(temp);
-                            }
-                        }
-
-                        temp = "";
-                        // 0
-                        if (A[i][j] * 0 > b[i])
-                        {
-                            if (A[i][j] != 0)
-                                temp += $"-{j + 1} ";
+                            if (A[i][k] != 0)
+                                temp += $"{k + 1} ";
 
                             if (temp != "")
                             {
                                 temp += "0";
                                 result.Add(temp);
                             }
+                        }
+
+                        temp = "";
+                        // 1 0
+                        if (A[i][j] * 1 + A[i][k] * 0 > b[i])
+                        {
+                            if (A[i][j] != 0)
+                                temp += $"{j + 1} ";
+
+                            if (A[i][k] != 0)
+                                temp += $"-{k + 1} ";
+
+                            if (temp != "")
+                            {
+                                temp += "0";
+                                result.Add(temp);
+                            }
+                        }
+
+                        temp = "";
+                        // 0 1
+                        if (A[i][j] * 0 + A[i][k] * 1 > b[i])
+                        {
+                            if (A[i][j] != 0)
+                                temp += $"-{j + 1} ";
+
+                            if (A[i][k] != 0)
+                                temp += $"{k + 1} ";
+
+                            if (temp != "")
+                            {
+                                temp += "0";
+                                result.Add(temp);
+                            }
+                        }
+
+                        temp = "";
+                        // 0 0
+                        if (A[i][j] * 0 + A[i][k] * 0 > b[i])
+                        {
+                            if (A[i][j] != 0)
+                                temp += $"-{j + 1} ";
+
+                            if (A[i][k] != 0)
+                                temp += $"-{k + 1} ";
+
+                            if (temp != "")
+                            {
+                                temp += "0";
+                                result.Add(temp);
+                            }
+                        }
+                    }
+                }
+
+                // 1 variable
+                for (int j = 0; j < varCount; j++)
+                {
+                    if (A[i][j] == 0)
+                        continue;
+                    temp = "";
+                    // 1
+                    if (A[i][j] * 1 > b[i])
+                    {
+                        if (A[i][j] != 0)
+                            temp += $"{j + 1} ";
+
+                        if (temp != "")
+                        {
+                            temp += "0";
+                            result.Add(temp);
+                        }
+                    }
+
+                    temp = "";
+                    // 0
+                    if (A[i][j] * 0 > b[i])
+                    {
+                        if (A[i][j] != 0)
+                            temp += $"-{j + 1} ";
+
+                        if (temp != "")
+                        {
+                            temp += "0";
+                            result.Add(temp);
                         }
                     }
                 }
