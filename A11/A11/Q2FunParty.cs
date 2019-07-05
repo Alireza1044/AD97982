@@ -9,12 +9,12 @@ namespace A11
 {
     public class Node
     {
-        public List<long> Children { get; set; } = new List<long>();
-        public long Parent { get; set; }
+        public List<long> Connected { get; set; } = new List<long>();
         public long FunFactor { get; set; }
-        public Node(long parent = -1, long funFactor = -1)
+        public bool IsChecked { get; set; }
+        public Node(long funFactor = -1)
         {
-            this.Parent = parent;
+            IsChecked = false;
             this.FunFactor = funFactor;
         }
     }
@@ -32,9 +32,16 @@ namespace A11
             Node[] graph = BuildGraph(n, funFactors, hierarchy);
             long root = -1;
 
-            for (int i = 1; i < graph.Length; i++)
+            bool[] isRoot = new bool[n + 1];
+
+            for (int i = 0; i < hierarchy.Length; i++)
             {
-                if (graph[i].Parent == -1)
+                isRoot[hierarchy[i][1]] = true;
+            }
+
+            for (int i = 1; i < isRoot.Length; i++)
+            {
+                if (!isRoot[i])
                 {
                     root = i;
                     break;
@@ -43,39 +50,41 @@ namespace A11
 
             long result = int.MaxValue;
 
-            result = FunParty(graph,root,result);
+            result = FunParty(graph, root, result);
 
             return result;
         }
 
         private long FunParty(Node[] graph, long root, long result)
         {
-            if(result == int.MaxValue)
+            if (result == int.MaxValue)
             {
-                if (graph[root].Children.Count == 0)
+                if (graph[root].Connected.Count == 0)
                     result = graph[root].FunFactor;
                 else
                 {
                     long fTemp = graph[root].FunFactor;
-                    for (int i = 0; i < graph[root].Children.Count; i++)
+                    for (int i = 0; i < graph[root].Connected.Count; i++)
                     {
-                        for (int j = 0; j < graph[graph[root].Children[i]].Children.Count; j++)
+                        graph[graph[root].Connected[i]].Connected.Remove(root);
+                    }
+                    for (int i = 0; i < graph[root].Connected.Count; i++)
+                    {
+                        for (int j = 0; j < graph[graph[root].Connected[i]].Connected.Count; j++)
                         {
-                            fTemp += FunParty(graph, graph[graph[root].Children[i]].Children[j],result);
+                            graph[graph[graph[root].Connected[i]].Connected[j]].Connected.Remove(graph[root].Connected[i]);
+                            fTemp += FunParty(graph, graph[graph[root].Connected[i]].Connected[j], result);
                         }
                     }
                     long sTemp = 0;
-
-                    for (int i = 0; i < graph[root].Children.Count; i++)
+                    for (int i = 0; i < graph[root].Connected.Count; i++)
                     {
-                        sTemp += FunParty(graph,graph[root].Children[i],result);
+                        graph[graph[root].Connected[i]].Connected.Remove(root);
+                        sTemp += FunParty(graph, graph[root].Connected[i], result);
                     }
-
                     result = Math.Max(sTemp, fTemp);
-
                 }
             }
-
             return result;
         }
 
@@ -85,43 +94,14 @@ namespace A11
 
             for (int i = 1; i < graph.Length; i++)
             {
-                graph[i] = new Node();
+                graph[i] = new Node(funFactors[i - 1]);
             }
 
             for (int i = 0; i < hierarchy.Length; i++)
             {
-                if (graph[hierarchy[i][0]].FunFactor == -1)
-                {
-                    if (graph[hierarchy[i][1]].FunFactor == -1)
-                    {
-                        graph[hierarchy[i][0]] = new Node(funFactor: funFactors[hierarchy[i][0] - 1]);
-                        graph[hierarchy[i][0]].Children.Add(hierarchy[i][1]);
-                        graph[hierarchy[i][1]] = new Node(funFactor: funFactors[hierarchy[i][1] - 1], parent: hierarchy[i][0]);
-                    }
-                    else
-                    {
-                        graph[hierarchy[i][1]].Children.Add(hierarchy[i][0]);
-                        graph[hierarchy[i][0]] = new Node(funFactor:funFactors[hierarchy[i][0] - 1],parent: hierarchy[i][1]);
-                    }
-                }
-                else
-                {
-                    if (graph[hierarchy[i][1]].FunFactor == -1)
-                    {
-                        graph[hierarchy[i][0]].Children.Add(hierarchy[i][1]);
-                        graph[hierarchy[i][1]] = new Node(funFactor: funFactors[hierarchy[i][1] - 1], parent: hierarchy[i][0]);
-                    }
-                    else
-                    {
-                        long temp = hierarchy[i][1];
-                        while (graph[temp].Parent != -1)
-                            temp = graph[temp].Parent;
-                        graph[hierarchy[i][0]].Children.Add(temp);
-                        graph[temp].Parent = hierarchy[i][0];
-                    }
-                }
+                graph[hierarchy[i][0]].Connected.Add(hierarchy[i][1]);
+                graph[hierarchy[i][1]].Connected.Add(hierarchy[i][0]);
             }
-
             return graph;
         }
     }
