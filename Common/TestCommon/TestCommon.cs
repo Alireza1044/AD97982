@@ -38,7 +38,7 @@ namespace TestCommon
 
             return solve(dim, table2d);
         }
-        public static string Process(string inStr, Func<BigInteger, BigInteger, BigInteger[], string> solve)
+        public static string ProcessQ(string inStr, Func<BigInteger, BigInteger, BigInteger[], string> solve)
         {
             var lines = inStr.Split(NewLineChars, StringSplitOptions.RemoveEmptyEntries);
             var n = BigInteger.Parse(lines[0]);
@@ -48,7 +48,7 @@ namespace TestCommon
             return solve(n, e, cipher);
         }
 
-        public static string Process(string inStr, Func<BigInteger, BigInteger[]> solve)
+        public static string ProcessQ(string inStr, Func<BigInteger, BigInteger[]> solve)
         {
             var lines = inStr.Split(NewLineChars, StringSplitOptions.RemoveEmptyEntries);
             var n = BigInteger.Parse(lines[0]);
@@ -57,7 +57,7 @@ namespace TestCommon
         }
 
 
-        public static string Process(string inStr, Func<BigInteger, BigInteger, BigInteger> solve)
+        public static string ProcessQ(string inStr, Func<BigInteger, BigInteger, BigInteger> solve)
         {
             var lines = inStr.Split(NewLineChars, StringSplitOptions.RemoveEmptyEntries);
             var n = BigInteger.Parse(lines[0]);
@@ -66,7 +66,7 @@ namespace TestCommon
             return result.ToString();
         }
 
-        public static string Process(string inStr, Func<BigInteger, BigInteger, string, BigInteger[]> solve)
+        public static string ProcessQ(string inStr, Func<BigInteger, BigInteger, string, BigInteger[]> solve)
         {
             var lines = inStr.Split(NewLineChars, StringSplitOptions.RemoveEmptyEntries);
             var n = BigInteger.Parse(lines[0]);
@@ -76,7 +76,7 @@ namespace TestCommon
             return string.Join(",", result);
         }
 
-        public static string Process(string inStr, Func<BigInteger, BigInteger, BigInteger, BigInteger> solve)
+        public static string ProcessQ(string inStr, Func<BigInteger, BigInteger, BigInteger, BigInteger> solve)
         {
             var lines = inStr.Split(NewLineChars, StringSplitOptions.RemoveEmptyEntries);
             var p = BigInteger.Parse(lines[0]);
