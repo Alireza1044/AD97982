@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Numerics;
 
 namespace TestCommon
 {
@@ -12,6 +13,13 @@ namespace TestCommon
     {
         public static readonly char[] IgnoreChars = new char[] { '\n', '\r', ' ' };
         public static readonly char[] NewLineChars = new char[] { '\n', '\r' };
+
+
+        public static string Process(string inStr, Func<string[], string> solve)
+        {
+            var lines = inStr.Split(NewLineChars, StringSplitOptions.RemoveEmptyEntries);
+            return solve(lines);
+        }
 
         public static string Process(string inStr, Func<int, int?[,], string> solve)
         {
@@ -29,6 +37,53 @@ namespace TestCommon
                     table2d[i, j] = table[i][j];
 
             return solve(dim, table2d);
+        }
+        public static string Process(string inStr, Func<BigInteger, BigInteger, BigInteger[], string> solve)
+        {
+            var lines = inStr.Split(NewLineChars, StringSplitOptions.RemoveEmptyEntries);
+            var n = BigInteger.Parse(lines[0]);
+            var e = BigInteger.Parse(lines[1]);
+            var cipher = lines[2].Split(IgnoreChars, StringSplitOptions.RemoveEmptyEntries)
+                                 .Select(x => BigInteger.Parse(x)).ToArray();
+            return solve(n, e, cipher);
+        }
+
+        public static string Process(string inStr, Func<BigInteger, BigInteger[]> solve)
+        {
+            var lines = inStr.Split(NewLineChars, StringSplitOptions.RemoveEmptyEntries);
+            var n = BigInteger.Parse(lines[0]);
+            var result = solve(n);
+            return string.Join(" ", result);
+        }
+
+
+        public static string Process(string inStr, Func<BigInteger, BigInteger, BigInteger> solve)
+        {
+            var lines = inStr.Split(NewLineChars, StringSplitOptions.RemoveEmptyEntries);
+            var n = BigInteger.Parse(lines[0]);
+            var e = BigInteger.Parse(lines[1]);
+            var result = solve(n, e);
+            return result.ToString();
+        }
+
+        public static string Process(string inStr, Func<BigInteger, BigInteger, string, BigInteger[]> solve)
+        {
+            var lines = inStr.Split(NewLineChars, StringSplitOptions.RemoveEmptyEntries);
+            var n = BigInteger.Parse(lines[0]);
+            var e = BigInteger.Parse(lines[1]);
+            var plain = lines[2];
+            var result = solve(n, e, plain);
+            return string.Join(",", result);
+        }
+
+        public static string Process(string inStr, Func<BigInteger, BigInteger, BigInteger, BigInteger> solve)
+        {
+            var lines = inStr.Split(NewLineChars, StringSplitOptions.RemoveEmptyEntries);
+            var p = BigInteger.Parse(lines[0]);
+            var q = BigInteger.Parse(lines[1]);
+            var e = BigInteger.Parse(lines[2]);
+            var result = solve(p, q, e);
+            return result.ToString();
         }
 
         public static string Process(string inStr, Func<long, char[], long[][], char[]> solve)
