@@ -19,7 +19,7 @@ namespace A11.Tests
             RunTest(new Q1CircuitDesign("TD1"));
         }
 
-        [TestMethod()/*, Timeout(4000)*/]
+        [TestMethod(), Timeout(4000)]
         public void SolveTest_Q2FunParty()
         {
             RunTest(new Q2FunParty("TD2"));
@@ -31,7 +31,7 @@ namespace A11.Tests
             RunTest(new Q3SchoolBus("TD3"));
         }
 
-        [TestMethod(), Timeout(4000)]
+        [TestMethod()/*, Timeout(4000)*/]
         public void SolveTest_Q4RescheduleExam()
         {
             RunTest(new Q4RescheduleExam("TD4"));
