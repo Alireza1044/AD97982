@@ -12,7 +12,6 @@ namespace A11
     {
         public Q4RescheduleExam(string testDataName) : base(testDataName)
         {
-            ExcludeTestCaseRangeInclusive(1, 2);
         }
 
         public override string Process(string inStr) =>
