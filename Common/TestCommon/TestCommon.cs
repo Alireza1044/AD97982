@@ -13,8 +13,6 @@ namespace TestCommon
         public static readonly char[] IgnoreChars = new char[] { '\n', '\r', ' ' };
         public static readonly char[] NewLineChars = new char[] { '\n', '\r' };
 
-<<<<<<< HEAD
-=======
         public static string Process(string inStr, Func<int, int?[,], string> solve)
         {
             var lines = inStr.Split(NewLineChars, StringSplitOptions.RemoveEmptyEntries);
@@ -33,7 +31,6 @@ namespace TestCommon
             return solve(dim, table2d);
         }
 
->>>>>>> 67a23f137643079f84f187a0e577d0a6aa37c998
         public static string Process(string inStr, Func<long, char[], long[][], char[]> solve)
         {
             var lines = inStr.Split(NewLineChars, StringSplitOptions.RemoveEmptyEntries);

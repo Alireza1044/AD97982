@@ -18,13 +18,7 @@ namespace A11
             TestTools.Process(inStr, (Func<long, char[], long[][], char[]>)Solve);
 
         public static readonly char[] colors_3 = new char[] { 'R', 'G', 'B' };
-        public static readonly Dictionary<char, long> colors_num = new Dictionary<char, long>
-        {
-            {'R', 1 },
-            {'G', 2 },
-            {'B', 3 }
 
-        };
         // R = 1
         // G = 2
         // B = 3
