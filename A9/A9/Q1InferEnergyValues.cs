@@ -7,7 +7,6 @@ namespace A9
     {
         public Q1InferEnergyValues(string testDataName) : base(testDataName)
         {
-            this.ExcludeTestCaseRangeInclusive(1, 13);
         }
 
         public override string Process(string inStr) =>
