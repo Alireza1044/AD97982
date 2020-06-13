@@ -1,5 +1,5 @@
 # Algorithm Design
-Repo for the amazing `Algorithm Design and Analysis` Course in universiry instructed by [Dr.Sauleh Eetemadi](https://sauleh.github.io) which is based on UCSD's data structures and algorithms specialization on coursera.
+Repo for the amazing `Algorithm Design and Analysis` Course in university instructed by [Dr.Sauleh Eetemadi](https://sauleh.github.io) which is based on UCSD's data structures and algorithms specialization on coursera.
 
 * [Algorithm Design and Analysis - Spring 2019](https://sauleh.github.io/ad97/)
 
